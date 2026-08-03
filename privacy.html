@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — SpaceWise</title>
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<header class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30 62 L50 30 L70 62 Z" fill="#E94560"/></svg></span>
+    SpaceWise
+  </a>
+  <a href="index.html">&larr; Back to home</a>
+</header>
+
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated August 3, 2026</p>
+
+<div class="callout"><strong>The short version:</strong> SpaceWise runs entirely on your Mac. It reads file names, paths, and sizes to figure out what's using your storage — it never reads file contents, and it doesn't send your data anywhere unless you explicitly choose to activate a paid license, in which case only the license key itself is checked against our payment provider.</div>
+
+<h2>1. What SpaceWise does on your device</h2>
+<p>SpaceWise scans folders you already have access to and records, locally, three things about each item it finds: its file path, its size, and when it was last modified or accessed. This data is stored in a local database on your Mac (in your user Application Support folder) and is never transmitted anywhere.</p>
+<p>SpaceWise does not open, read, or inspect the contents of your files. It never uploads a file, a file listing, or any derived data to any server as part of normal scanning or cleanup.</p>
+
+<h2>2. What we don't collect</h2>
+<ul>
+  <li>No analytics or usage telemetry by default</li>
+  <li>No account, email address, or sign-in required to use the app</li>
+  <li>No file contents, ever</li>
+  <li>No location data, no device fingerprinting, no advertising identifiers</li>
+</ul>
+
+<h2>3. The one network request SpaceWise can make</h2>
+<p>If you choose to activate an optional support license or a business license, SpaceWise sends your license key to our payment processor (Lemon Squeezy) to confirm it's valid. That's the only outbound network request the app makes, and it only happens if you initiate it from the Settings or Findings screen. You can verify this yourself with a network monitor like Little Snitch.</p>
+<p>Lemon Squeezy processes payment and billing information under its own privacy policy, available at <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">lemonsqueezy.com/privacy</a>. SpaceWise never sees or stores your payment details.</p>
+
+<h2>4. Rules database updates</h2>
+<p>SpaceWise's classification rules (the database that recognizes things like Ollama model folders or Xcode caches) may be periodically fetched from a static, public JSON file we host, so the app can recognize new software without requiring an app update. This request contains no information about you or your files — it's a plain, unauthenticated file download, same as loading any public webpage.</p>
+
+<h2>5. Data you control</h2>
+<p>Everything SpaceWise stores lives in a local SQLite database on your Mac. You can delete it at any time by removing the app's Application Support folder, or by uninstalling the app. Nothing persists on any server we control, because nothing is ever sent to one.</p>
+
+<h2>6. Changes to this policy</h2>
+<p>If this policy changes in a way that affects what data leaves your device, we'll update this page and the "Last updated" date above. Given the local-only architecture is a core product commitment (see our positioning), we don't expect this to change in any way that compromises it.</p>
+
+<h2>7. Contact</h2>
+<p>Questions about this policy: <a href="mailto:asamy0754@gmail.com">asamy0754@gmail.com</a>.</p>
+
+<footer>
+  <p>This page describes SpaceWise's actual technical behavior as of the date above. It is not a substitute for legal advice; if you have specific compliance requirements (e.g. as a business deploying SpaceWise at scale), consult your own counsel.</p>
+</footer>
+</body>
+</html>
