@@ -16,7 +16,7 @@
 </header>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated August 3, 2026</p>
+<p class="updated">Last updated August 9, 2026</p>
 
 <div class="callout"><strong>The short version:</strong> SpaceWise runs entirely on your Mac. It reads file names, paths, and sizes to figure out what's using your storage — it never reads file contents, and it doesn't send your data anywhere unless you explicitly choose to activate a paid license, in which case only the license key itself is checked against our payment provider.</div>
 
@@ -36,8 +36,8 @@
 <p>If you choose to activate an optional support license or a business license, SpaceWise sends your license key to our payment processor (Lemon Squeezy) to confirm it's valid. That's the only outbound network request the app makes, and it only happens if you initiate it from the Settings or Findings screen. You can verify this yourself with a network monitor like Little Snitch.</p>
 <p>Lemon Squeezy processes payment and billing information under its own privacy policy, available at <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">lemonsqueezy.com/privacy</a>. SpaceWise never sees or stores your payment details.</p>
 
-<h2>4. Rules database updates</h2>
-<p>SpaceWise's classification rules (the database that recognizes things like Ollama model folders or Xcode caches) may be periodically fetched from a static, public JSON file we host, so the app can recognize new software without requiring an app update. This request contains no information about you or your files — it's a plain, unauthenticated file download, same as loading any public webpage.</p>
+<h2>4. Rules database</h2>
+<p>SpaceWise's classification rules (the database that recognizes things like Ollama model folders or Xcode caches) currently ship inside the app itself and are only ever updated when you install a new version of SpaceWise — the app does not fetch or check for rule updates over the network. If that changes in a future version, this section will be updated first, and any such request would remain a plain, unauthenticated file download containing no information about you or your files.</p>
 
 <h2>5. Data you control</h2>
 <p>Everything SpaceWise stores lives in a local SQLite database on your Mac. You can delete it at any time by removing the app's Application Support folder, or by uninstalling the app. Nothing persists on any server we control, because nothing is ever sent to one.</p>
