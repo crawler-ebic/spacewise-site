@@ -28,267 +28,282 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "SpaceWise",
-  "operatingSystem": "macOS",
+  "operatingSystem": "macOS 14",
   "applicationCategory": "UtilitiesApplication",
   "offers": { "@type": "Offer", "price": "29", "priceCurrency": "USD" },
   "description": "A privacy-first Mac storage cleaner that explains what's using your disk in plain English before you delete anything."
 }
 </script>
-
 <style>
-  :root{
-    --navy:#232B36;
-    --navy-deep:#171D24;
-    --navy-bright:#2E3644;
-    --coral:#E3A23C;
-    --coral-dark:#B87A1E;
-    --bg-light:#F6F1E8;
-    --ink:#20242B;
-    --ink-soft:#5C5750;
-    --safe:#2ECC71;
-    --caution:#F5A623;
-    --line:#E7E1D5;
-    --white:#FFFFFF;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);
-    background:var(--white);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-  section{padding:96px 0;position:relative;}
-  @media (max-width:720px){section{padding:64px 0;}}
+:root{
+  --navy:#232B36; --navy-deep:#12171D; --navy-mid:#1A212A; --navy-bright:#2E3644;
+  --coral:#E3A23C; --coral-lit:#F5BC5E; --coral-dark:#B87A1E;
+  --cream:#F6F1E8; --ink:#20242B; --ink-soft:#5C5750;
+  --safe:#3DD68C; --caution:#F5A623; --danger:#F2665A;
+  --line:rgba(246,241,232,.12); --line-solid:#E7E1D5;
+  --white:#fff;
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:34px;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Inter,system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans); background:var(--navy-deep); color:var(--cream);
+  line-height:1.62; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+a{color:inherit}
+h1,h2,h3,h4{line-height:1.1;letter-spacing:-.03em;font-weight:680}
+h2{font-size:clamp(30px,4.4vw,50px);margin-bottom:16px}
+h3{font-size:20px;letter-spacing:-.02em}
+p{color:rgba(246,241,232,.72)}
+section{position:relative;padding:clamp(80px,10vw,132px) 0}
 
-  @keyframes drift{
-    0%,100%{transform:translate(0,0) scale(1);}
-    50%{transform:translate(24px,-18px) scale(1.06);}
-  }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  @keyframes spinRev{ to{ transform:rotate(-360deg); } }
-  @keyframes pulseFade{
-    0%,100%{opacity:.55;} 50%{opacity:1;}
-  }
+/* ---------- scroll progress ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:200;background:transparent;pointer-events:none}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--coral),var(--coral-lit));box-shadow:0 0 14px rgba(227,162,60,.7)}
 
-  /* Nav */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,0.85);
-    backdrop-filter:saturate(180%) blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1120px;margin:0 auto;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-0.01em;}
-  .brand-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--navy-bright),var(--navy-deep));display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(35,43,54,0.35);}
-  .brand-mark svg{width:16px;height:16px;}
-  .nav-links{display:flex;gap:28px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
-  .nav-links a:hover{color:var(--ink);}
-  .nav-cta{display:flex;gap:10px;align-items:center;}
-  @media (max-width:720px){.nav-links{display:none;}}
+/* ---------- ambient aurora ---------- */
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora span{
+  position:absolute;border-radius:50%;filter:blur(90px);opacity:.42;
+  animation:drift 26s var(--ease) infinite alternate;
+}
+.aurora span:nth-child(1){width:620px;height:620px;background:radial-gradient(circle,#E3A23C,transparent 66%);top:-190px;left:-130px}
+.aurora span:nth-child(2){width:560px;height:560px;background:radial-gradient(circle,#4A7DBE,transparent 66%);top:16%;right:-190px;animation-delay:-9s}
+.aurora span:nth-child(3){width:640px;height:640px;background:radial-gradient(circle,#7A5AA8,transparent 66%);bottom:4%;left:12%;animation-delay:-17s}
+@keyframes drift{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(58px,-46px) scale(1.14)}
+  100%{transform:translate(-42px,52px) scale(.94)}
+}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
 
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:11px 20px;border-radius:10px;font-weight:600;font-size:14.5px;
-    border:1px solid transparent;cursor:pointer;transition:all .15s ease;
-  }
-  .btn-primary{background:var(--coral);color:#fff;}
-  .btn-primary:hover{background:var(--coral-dark);transform:translateY(-1px);}
-  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
-  .btn-ghost:hover{border-color:var(--navy);}
-  .btn-lg{padding:15px 28px;font-size:16px;border-radius:12px;}
-  .btn-dark{background:linear-gradient(135deg,var(--navy-bright),var(--navy-deep));color:#fff;box-shadow:0 8px 24px -8px rgba(35,43,54,0.5);}
-  .btn-dark:hover{transform:translateY(-1px);box-shadow:0 12px 28px -8px rgba(35,43,54,0.55);}
+/* ---------- nav ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:150;transition:all .4s var(--ease)}
+header.solid{background:rgba(18,23,29,.76);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;letter-spacing:-.02em;text-decoration:none}
+.brand-mark{width:31px;height:31px;border-radius:9px;background:linear-gradient(140deg,var(--navy-bright),var(--navy));display:grid;place-items:center;box-shadow:0 3px 14px rgba(0,0,0,.4);overflow:hidden;position:relative}
+.brand-mark svg{width:70%;height:70%;position:relative;z-index:1}
+.brand-mark::after{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(227,162,60,.28),transparent 60%)}
+.nav-links{display:flex;gap:30px;font-size:14.5px}
+.nav-links a{color:rgba(246,241,232,.66);text-decoration:none;transition:color .25s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--coral);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:flex;gap:11px;align-items:center}
 
-  /* Ambient background (hero) */
-  .hero{
-    padding:96px 0 64px;
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(180deg,#F6F8FF 0%,#FFFFFF 70%);
-  }
-  .ambient-blob{
-    position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;
-    animation:drift 10s ease-in-out infinite;
-  }
-  .ambient-blob.b1{width:480px;height:480px;background:radial-gradient(circle,rgba(35,43,54,0.16),transparent 70%);top:-160px;left:-120px;animation-delay:0s;}
-  .ambient-blob.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(227,162,60,0.14),transparent 70%);top:-80px;right:-140px;animation-delay:2s;}
-  .ambient-blob.b3{width:380px;height:380px;background:radial-gradient(circle,rgba(46,204,113,0.10),transparent 70%);bottom:-200px;left:40%;animation-delay:4s;}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:11px;font-size:14.5px;font-weight:600;
+  text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .28s var(--ease);white-space:nowrap;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#1A1206;box-shadow:0 6px 22px rgba(227,162,60,.32)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(227,162,60,.46)}
+.btn-primary::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.42),transparent 70%);transform:translateX(-100%)}
+.btn-primary:hover::before{transform:translateX(100%);transition:transform .8s var(--ease)}
+.btn-ghost{background:rgba(246,241,232,.06);color:var(--cream);border-color:var(--line)}
+.btn-ghost:hover{background:rgba(246,241,232,.12);border-color:rgba(246,241,232,.28);transform:translateY(-2px)}
+.btn-lg{padding:15px 28px;font-size:16px;border-radius:13px}
 
-  .hero-inner{max-width:760px;margin:0 auto;text-align:center;position:relative;z-index:1;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:6px 14px;border-radius:999px;background:var(--bg-light);
-    color:var(--navy);font-size:13px;font-weight:600;margin-bottom:22px;
-    border:1px solid #EAD9B8;
-  }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--coral);animation:pulseFade 2s ease-in-out infinite;}
-  h1{
-    font-size:54px;line-height:1.08;letter-spacing:-0.02em;font-weight:800;color:var(--ink);
-  }
-  h1 span{
-    background:linear-gradient(120deg,var(--coral),#c93650);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  @media (max-width:720px){h1{font-size:36px;}}
-  .hero p.lede{
-    margin:22px auto 0;max-width:580px;font-size:19px;color:var(--ink-soft);
-  }
-  .hero-actions{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
-  .hero-note{margin-top:16px;font-size:13px;color:var(--ink-soft);}
+/* ---------- hero ---------- */
+.hero{padding-top:150px;padding-bottom:70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:100px;
+  background:rgba(227,162,60,.1);border:1px solid rgba(227,162,60,.26);color:var(--coral-lit);
+  font-size:13px;font-weight:560;letter-spacing:.01em;margin-bottom:26px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--coral);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(227,162,60,.6)}50%{opacity:.65;box-shadow:0 0 0 7px rgba(227,162,60,0)}}
+.hero h1{font-size:clamp(42px,7.2vw,82px);font-weight:700;letter-spacing:-.045em;margin-bottom:22px}
+.hero h1 .grad{background:linear-gradient(105deg,var(--coral-lit),var(--coral) 45%,#C98F32);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{font-size:clamp(16.5px,2vw,19.5px);max-width:660px;margin:0 auto 34px;color:rgba(246,241,232,.7)}
+.hero-actions{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.hero-note{font-size:13.5px;color:rgba(246,241,232,.5)}
+.gk{max-width:600px;margin:26px auto 0;padding:15px 19px;border-radius:var(--r);text-align:left;
+  background:rgba(246,241,232,.045);border:1px solid var(--line)}
+.gk strong{color:var(--cream)}
+.gk p{font-size:13.5px;line-height:1.6;color:rgba(246,241,232,.68)}
+.gk .gk-t{font-weight:640;font-size:14px;color:var(--cream);margin-bottom:5px;display:flex;align-items:center;gap:8px}
 
-  /* Orbit visual behind mockup */
-  .orbit-stage{position:relative;margin:64px auto 0;max-width:920px;}
-  .orbit-ring{
-    position:absolute;border-radius:50%;border:1.5px dashed rgba(227,162,60,0.35);
-    top:50%;left:50%;pointer-events:none;
-  }
-  .orbit-ring.r1{width:640px;height:640px;margin:-320px 0 0 -320px;animation:spin 40s linear infinite;}
-  .orbit-ring.r2{width:760px;height:760px;margin:-380px 0 0 -380px;border-color:rgba(35,43,54,0.16);animation:spinRev 55s linear infinite;}
+/* ---------- app window mock ---------- */
+.stage{margin-top:64px;perspective:1900px}
+.mock{
+  max-width:940px;margin:0 auto;border-radius:var(--r-xl);overflow:hidden;
+  background:linear-gradient(168deg,#232B36,#161C24);
+  border:1px solid rgba(246,241,232,.13);
+  box-shadow:0 50px 110px -26px rgba(0,0,0,.86),0 0 0 1px rgba(0,0,0,.4);
+  transform:rotateX(9deg) scale(.97);transform-origin:center top;
+  transition:transform 1s var(--ease);
+}
+.mock.lifted{transform:rotateX(0deg) scale(1)}
+.mock-bar{display:flex;align-items:center;gap:8px;padding:13px 17px;background:rgba(0,0,0,.28);border-bottom:1px solid rgba(246,241,232,.08)}
+.md{width:11px;height:11px;border-radius:50%}
+.mock-title{margin-left:12px;font-size:12.5px;color:rgba(246,241,232,.42);font-weight:520}
+.mock-body{display:grid;grid-template-columns:190px 1fr;min-height:430px;text-align:left}
+.side{padding:18px 12px;background:rgba(0,0,0,.16);border-right:1px solid rgba(246,241,232,.07)}
+.side .item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:13.5px;color:rgba(246,241,232,.6);margin-bottom:3px;transition:all .3s}
+.side .item.active{background:rgba(227,162,60,.14);color:var(--coral-lit);font-weight:580}
+.side .item i{width:15px;text-align:center;font-style:normal;opacity:.85}
+.main{padding:22px 24px}
+.hero-card{background:linear-gradient(135deg,rgba(227,162,60,.16),rgba(227,162,60,.05));
+  border:1px solid rgba(227,162,60,.24);border-radius:var(--r);padding:19px 21px;margin-bottom:19px}
+.hero-card .lbl{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,241,232,.5);font-weight:640;margin-bottom:5px}
+.hero-card .val{font-size:41px;font-weight:720;letter-spacing:-.035em;color:var(--cream);font-variant-numeric:tabular-nums}
+.track{height:8px;border-radius:100px;overflow:hidden;display:flex;background:rgba(0,0,0,.34);margin-top:14px}
+.track i{height:100%;width:0;transition:width 1.5s var(--ease)}
+.legend{display:flex;gap:16px;margin-top:11px;font-size:11.5px;color:rgba(246,241,232,.55);flex-wrap:wrap}
+.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+.scanline{font-family:var(--mono);font-size:11.5px;color:rgba(246,241,232,.4);margin-bottom:13px;height:15px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:11px;background:rgba(246,241,232,.045);
+  border:1px solid rgba(246,241,232,.07);opacity:0;transform:translateY(9px)}
+.row.in{animation:rowIn .55s var(--ease) forwards}
+@keyframes rowIn{to{opacity:1;transform:translateY(0)}}
+.pill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0}
+.pill.safe{background:rgba(61,214,140,.16);color:var(--safe)}
+.pill.caution{background:rgba(245,166,35,.16);color:var(--caution)}
+.pill.danger{background:rgba(242,102,90,.16);color:var(--danger)}
+.row .nm{flex:1;font-size:13.5px;color:rgba(246,241,232,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .sz{font-size:13px;font-weight:640;color:var(--cream);font-variant-numeric:tabular-nums}
 
-  /* Mockup window */
-  .mock{
-    margin:0 auto;max-width:920px;position:relative;z-index:1;
-    border-radius:16px;overflow:hidden;
-    box-shadow:0 30px 80px -20px rgba(35,43,54,0.35), 0 8px 24px -8px rgba(35,43,54,0.15);
-    border:1px solid #E4E9F5;
-  }
-  .mock-bar{
-    background:#EEF1F8;padding:10px 14px;display:flex;align-items:center;gap:8px;
-    border-bottom:1px solid var(--line);
-  }
-  .mock-dot{width:11px;height:11px;border-radius:50%;}
-  .mock-body{background:var(--white);padding:28px;display:grid;grid-template-columns:170px 1fr;gap:0;text-align:left;}
-  .mock-sidebar{border-right:1px solid var(--line);padding-right:20px;}
-  .mock-sidebar .item{padding:9px 10px;border-radius:8px;font-size:13.5px;color:var(--ink-soft);margin-bottom:4px;}
-  .mock-sidebar .item.active{background:var(--bg-light);color:var(--navy);font-weight:600;}
-  .mock-main{padding-left:24px;}
-  .mock-hero-card{background:linear-gradient(135deg,var(--bg-light),#FBF3E4);border-radius:12px;padding:20px;border:1px solid #EEDFC4;}
-  .mock-hero-card .label{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
-  .mock-hero-card .value{font-size:30px;font-weight:800;color:var(--ink);margin:6px 0 14px;}
-  .mock-bar-track{height:10px;border-radius:6px;overflow:hidden;display:flex;background:#e7ecf7;}
-  .mock-cards{display:flex;gap:10px;margin-top:16px;}
-  .mock-card{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;}
-  .mock-card .n{font-size:11.5px;color:var(--ink-soft);font-weight:600;}
-  .mock-card .s{font-size:15px;font-weight:700;margin-top:4px;}
-  @media (max-width:720px){.mock-body{grid-template-columns:1fr;}.mock-sidebar{display:none;}.mock-cards{flex-wrap:wrap;}.orbit-ring{display:none;}}
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv-d1{transition-delay:.09s}.rv-d2{transition-delay:.18s}.rv-d3{transition-delay:.27s}.rv-d4{transition-delay:.36s}
 
-  /* Origin story */
-  .story{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;overflow:hidden;}
-  .story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1;}
-  @media (max-width:860px){.story .wrap{grid-template-columns:1fr;}}
-  .story h2{font-size:28px;letter-spacing:-0.01em;margin-bottom:16px;}
-  .story p{color:#C9D6EE;font-size:16px;}
-  .story-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px;}
-  .stat-card .big{font-size:30px;font-weight:800;}
-  .stat-card .cap{font-size:13px;color:#AEC0E4;margin-top:4px;}
-  .stat-card.flag .big{color:var(--coral);}
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.stat{padding:26px 22px;border-radius:var(--r-lg);background:rgba(246,241,232,.04);border:1px solid var(--line);text-align:center;transition:all .4s var(--ease)}
+.stat:hover{background:rgba(246,241,232,.07);transform:translateY(-4px);border-color:rgba(227,162,60,.3)}
+.stat .n{font-size:42px;font-weight:720;letter-spacing:-.04em;background:linear-gradient(120deg,var(--coral-lit),var(--coral));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+.stat .k{font-size:13.5px;color:rgba(246,241,232,.6);margin-top:4px}
 
-  /* Section headers */
-  .section-head{max-width:600px;margin:0 auto 52px;text-align:center;}
-  .section-head .kicker{color:var(--coral);font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;}
-  .section-head h2{font-size:34px;letter-spacing:-0.02em;}
-  .section-head p{margin-top:12px;color:var(--ink-soft);font-size:16px;}
+/* ---------- section head ---------- */
+.shead{max-width:660px;margin-bottom:52px}
+.shead.mid{margin-left:auto;margin-right:auto;text-align:center}
+.tag{display:inline-block;font-size:12px;font-weight:660;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:13px}
+.shead p{font-size:17px}
 
-  /* Pillars */
-  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  @media (max-width:900px){.pillars{grid-template-columns:1fr 1fr;}}
-  @media (max-width:560px){.pillars{grid-template-columns:1fr;}}
-  .pillar{border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .18s ease, box-shadow .18s ease;}
-  .pillar:hover{transform:translateY(-3px);box-shadow:0 16px 32px -18px rgba(35,43,54,0.25);}
-  .pillar .ic{width:44px;height:44px;border-radius:12px;background:var(--bg-light);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:20px;}
-  .pillar h3{font-size:16.5px;margin-bottom:8px;}
-  .pillar p{font-size:14.5px;color:var(--ink-soft);}
+/* ---------- cards ---------- */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(288px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.card{padding:29px 26px;border-radius:var(--r-lg);background:rgba(246,241,232,.042);
+  border:1px solid var(--line);transition:all .45s var(--ease);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .45s;
+  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),rgba(227,162,60,.11),transparent 42%)}
+.card:hover{transform:translateY(-5px);border-color:rgba(227,162,60,.32);background:rgba(246,241,232,.065)}
+.card:hover::before{opacity:1}
+.card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:20px;
+  background:linear-gradient(140deg,rgba(227,162,60,.2),rgba(227,162,60,.06));border:1px solid rgba(227,162,60,.22);margin-bottom:17px}
+.card h3{margin-bottom:9px}
+.card p{font-size:14.8px}
 
-  /* Trust / privacy panel */
-  .trust{background:#FAFBFF;}
-  .trust-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;}
-  @media (max-width:860px){.trust-grid{grid-template-columns:1fr;}}
-  .trust-copy h2{font-size:30px;letter-spacing:-0.02em;margin-bottom:16px;}
-  .trust-copy p{color:var(--ink-soft);font-size:16px;margin-bottom:14px;}
-  .trust-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 20px 50px -30px rgba(35,43,54,0.25);}
-  .trust-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);}
-  .trust-row:last-child{border-bottom:none;}
-  .trust-row .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0;}
-  .trust-row.ok .dot{background:var(--safe);}
-  .trust-row.one .dot{background:var(--caution);}
-  .trust-row h4{font-size:14.5px;margin-bottom:3px;}
-  .trust-row p{font-size:13.5px;color:var(--ink-soft);}
+/* ---------- case study ---------- */
+.case{border-radius:var(--r-xl);padding:clamp(30px,4.6vw,54px);
+  background:linear-gradient(150deg,rgba(242,102,90,.09),rgba(227,162,60,.05));
+  border:1px solid rgba(242,102,90,.2)}
+.case .num{font-size:clamp(46px,7.5vw,86px);font-weight:730;letter-spacing:-.05em;line-height:1;
+  background:linear-gradient(120deg,#F2665A,var(--coral));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
-  /* How it works */
-  .steps{background:#FAFBFF;}
-  .step-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-  @media (max-width:820px){.step-row{grid-template-columns:1fr;}}
-  .step{position:relative;padding-left:56px;}
-  .step .num{
-    position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
-    background:linear-gradient(135deg,var(--navy-bright),var(--navy-deep));color:#fff;display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:15px;
-  }
-  .step h3{font-size:17px;margin-bottom:8px;}
-  .step p{color:var(--ink-soft);font-size:14.5px;}
+/* ---------- steps ---------- */
+.steps{counter-reset:s;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.step{position:relative;padding:30px 26px 26px;border-radius:var(--r-lg);background:rgba(246,241,232,.042);border:1px solid var(--line);transition:all .4s var(--ease)}
+.step:hover{transform:translateY(-4px);border-color:rgba(227,162,60,.3)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-17px;left:26px;
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:16px;font-weight:730;
+  background:linear-gradient(140deg,var(--coral),var(--coral-dark));color:#1A1206;box-shadow:0 5px 18px rgba(227,162,60,.34)}
+.step h3{margin:11px 0 8px}
 
-  /* Safety ratings visual */
-  .ratings{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:44px;}
-  .rating-chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:600;}
-  .rating-chip .sw{width:9px;height:9px;border-radius:50%;}
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mrow{display:flex;gap:12px;width:max-content;animation:slide 42s linear infinite}
+.marquee:hover .mrow{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.chip{padding:9px 17px;border-radius:100px;background:rgba(246,241,232,.05);border:1px solid var(--line);
+  font-size:13.5px;color:rgba(246,241,232,.72);white-space:nowrap}
 
-  /* Pricing */
-  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;}
-  @media (max-width:900px){.pricing-grid{grid-template-columns:1fr;}}
-  .price-card{border:1px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column;}
-  .price-card.featured{border-color:var(--navy);box-shadow:0 20px 50px -20px rgba(35,43,54,0.35);position:relative;}
-  .featured-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--navy-bright),var(--navy-deep));color:#fff;font-size:11.5px;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:0.03em;}
-  .price-card h3{font-size:18px;margin-bottom:6px;}
-  .price-card .sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px;}
-  .price-card .amount{font-size:38px;font-weight:800;margin-bottom:2px;}
-  .price-card .per{font-size:13.5px;color:var(--ink-soft);margin-bottom:20px;}
-  .price-card ul{list-style:none;flex:1;margin-bottom:22px;}
-  .price-card li{display:flex;gap:10px;font-size:14px;color:var(--ink-soft);padding:7px 0;}
-  .price-card li:before{content:"✓";color:var(--safe);font-weight:800;}
-  .price-note{margin-top:36px;text-align:center;color:var(--ink-soft);font-size:13.5px;}
+/* ---------- privacy ---------- */
+.priv{border-radius:var(--r-xl);padding:clamp(30px,4.6vw,54px);
+  background:linear-gradient(150deg,rgba(61,214,140,.075),rgba(74,125,190,.05));border:1px solid rgba(61,214,140,.2)}
+.plist{list-style:none;display:grid;gap:13px;margin-top:22px}
+.plist li{display:flex;gap:12px;align-items:flex-start;font-size:15.2px;color:rgba(246,241,232,.78)}
+.chk{width:21px;height:21px;border-radius:50%;background:rgba(61,214,140,.16);color:var(--safe);
+  display:grid;place-items:center;flex-shrink:0;font-size:11px;font-weight:800;margin-top:2px}
 
-  /* FAQ */
-  .faq{max-width:760px;margin:0 auto;}
-  .faq-item{border-bottom:1px solid var(--line);}
-  .faq-q{
-    width:100%;text-align:left;background:none;border:none;cursor:pointer;
-    padding:20px 4px;font-size:16px;font-weight:600;color:var(--ink);
-    display:flex;justify-content:space-between;align-items:center;gap:16px;
-  }
-  .faq-q .plus{font-size:20px;color:var(--coral);transition:transform .2s ease;flex-shrink:0;}
-  .faq-item.open .plus{transform:rotate(45deg);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-  .faq-a p{padding:0 4px 20px;color:var(--ink-soft);font-size:14.5px;}
+/* ---------- pricing ---------- */
+.prices{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));max-width:860px;margin:0 auto}
+.price{padding:34px 30px;border-radius:var(--r-xl);background:rgba(246,241,232,.042);border:1px solid var(--line);
+  transition:all .45s var(--ease);position:relative}
+.price:hover{transform:translateY(-6px)}
+.price.feat{background:linear-gradient(160deg,rgba(227,162,60,.13),rgba(227,162,60,.04));border-color:rgba(227,162,60,.36);box-shadow:0 22px 60px -20px rgba(227,162,60,.28)}
+.price .badge{position:absolute;top:-12px;right:26px;padding:5px 13px;border-radius:100px;font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#1A1206}
+.price .amt{font-size:52px;font-weight:730;letter-spacing:-.045em;line-height:1;margin:10px 0 3px}
+.price .per{font-size:14px;color:rgba(246,241,232,.55)}
+.price ul{list-style:none;margin:22px 0;display:grid;gap:11px}
+.price li{display:flex;gap:10px;font-size:14.6px;color:rgba(246,241,232,.76)}
+.price li span{color:var(--coral);flex-shrink:0}
+.price .btn{width:100%;justify-content:center}
 
-  /* CTA */
-  .cta{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;text-align:center;overflow:hidden;}
-  .cta h2{font-size:32px;letter-spacing:-0.01em;margin-bottom:14px;}
-  .cta p{color:#C9D6EE;max-width:480px;margin:0 auto 32px;font-size:16px;}
+/* ---------- faq ---------- */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:11px}
+.qa{border-radius:var(--r);background:rgba(246,241,232,.042);border:1px solid var(--line);overflow:hidden;transition:all .35s}
+.qa:hover{border-color:rgba(246,241,232,.2)}
+.qa summary{padding:19px 22px;cursor:pointer;font-weight:600;font-size:15.8px;display:flex;justify-content:space-between;gap:16px;align-items:center;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";font-size:21px;color:var(--coral);transition:transform .35s var(--ease);flex-shrink:0;font-weight:400}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa .a{padding:0 22px 20px;font-size:14.8px;color:rgba(246,241,232,.7)}
 
-  footer{border-top:1px solid var(--line);padding:40px 0;}
-  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  .footer-links{display:flex;gap:22px;font-size:13.5px;color:var(--ink-soft);flex-wrap:wrap;}
-  .footer-links a:hover{color:var(--ink);}
-  .footer-copy{font-size:13px;color:#98A2B8;}
+/* ---------- cta ---------- */
+.cta{text-align:center;border-radius:var(--r-xl);padding:clamp(42px,6.5vw,78px) 30px;
+  background:linear-gradient(150deg,rgba(227,162,60,.15),rgba(227,162,60,.04));border:1px solid rgba(227,162,60,.28)}
 
-  @media (prefers-reduced-motion: reduce){
-    .ambient-blob,.orbit-ring,.eyebrow .dot{animation:none !important;}
-  }
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24)}
+.fin{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.flinks{display:flex;gap:24px;font-size:14px;flex-wrap:wrap}
+.flinks a{color:rgba(246,241,232,.6);text-decoration:none;transition:color .25s}
+.flinks a:hover{color:var(--coral)}
+.fcopy{font-size:13px;color:rgba(246,241,232,.4);width:100%;padding-top:8px}
+
+@media(max-width:860px){
+  .nav-links{display:none}
+  .mock-body{grid-template-columns:1fr}
+  .side{display:none}
+  .mock{transform:none}
+}
+@media(max-width:520px){
+  .hero{padding-top:118px}
+  .btn-lg{width:100%;justify-content:center}
+}
+
+/* Motion is decoration, never information. Anyone who has asked their OS
+   to reduce motion gets the full page with none of the movement. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+  .mock{transform:none}
+  .aurora span{animation:none}
+  .row{opacity:1;transform:none}
+}
 </style>
 </head>
-<body>
 
-<header class="nav">
-  <div class="nav-inner">
+<body id="top">
+<div class="progress"><i id="prog"></i></div>
+<div class="aurora"><span></span><span></span><span></span></div>
+<div class="grain"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
     <a href="#top" class="brand">
-      <span class="brand-mark"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/></svg></span>
+      <span class="brand-mark"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/><circle cx="50" cy="70" r="5" fill="#E3A23C"/></svg></span>
       SpaceWise
     </a>
     <nav class="nav-links">
@@ -300,273 +315,225 @@
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="https://github.com/crawler-ebic/spacewise-site/releases/tag/v1.0-beta" target="_blank" rel="noopener">Release notes</a>
-      <a class="btn btn-primary" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">Download for Mac</a>
+      <a class="btn btn-primary" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">Download</a>
     </div>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="ambient-blob b1"></div>
-    <div class="ambient-blob b2"></div>
-    <div class="ambient-blob b3"></div>
-    <div class="wrap hero-inner">
-      <span class="eyebrow"><span class="dot"></span> Beta build available now — notarized release coming very soon</span>
-      <h1>Understand your Mac's storage.<br><span>Not just find it.</span></h1>
-      <p class="lede">SpaceWise finds the storage macOS never explains — AI model caches, DerivedData, container data, forgotten downloads — and tells you in plain English exactly what it is, why it's there, and what happens if you delete it. Nothing gets touched until you say so.</p>
-      <div class="hero-actions">
-        <a class="btn btn-dark btn-lg" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">⬇ Download for Mac — v1.0 beta</a>
-        <a class="btn btn-ghost btn-lg" href="#download-help">First time opening it?</a>
-      </div>
-      <p class="hero-note">$29 one-time for individuals · No account required · 100% local, no cloud · macOS 14+ · Apple Silicon &amp; Intel</p>
-      <div id="download-help" style="margin-top:20px;max-width:560px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,0.6);text-align:left;">
-        <p style="margin:0 0 6px;font-weight:600;color:var(--ink);font-size:14px;">This build isn't Apple-notarized yet — here's how to open it</p>
-        <p style="margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.55;">macOS will say SpaceWise is from an "unidentified developer." That's expected for this beta build, not a sign anything's wrong. <strong>Right-click (or Control-click) the app → Open → Open</strong> — you'll only need to do this once. Or go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong> next to SpaceWise. A fully notarized build (no warning at all) is coming very soon.</p>
-      </div>
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow rv"><span class="dot"></span> Beta available now — notarized release coming soon</span>
+    <h1 class="rv rv-d1">Understand your Mac's storage.<br><span class="grad">Not just find it.</span></h1>
+    <p class="lede rv rv-d2">SpaceWise finds the storage macOS never explains — AI model caches, DerivedData, container data, forgotten downloads — and tells you in plain English exactly what it is, why it's there, and what happens if you delete it. Nothing gets touched until you say so.</p>
+    <div class="hero-actions rv rv-d3">
+      <a class="btn btn-primary btn-lg" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">↓&nbsp; Download for Mac — v1.0 beta</a>
+      <a class="btn btn-ghost btn-lg" href="#gatekeeper">First time opening it?</a>
+    </div>
+    <p class="hero-note rv rv-d3">$29 one-time for individuals · No account required · 100% local · macOS 14+ · Apple Silicon &amp; Intel</p>
 
-      <div class="orbit-stage">
-        <div class="orbit-ring r1"></div>
-        <div class="orbit-ring r2"></div>
-        <div class="mock">
-          <div class="mock-bar">
-            <span class="mock-dot" style="background:#FF5F57"></span>
-            <span class="mock-dot" style="background:#FEBC2E"></span>
-            <span class="mock-dot" style="background:#28C840"></span>
+    <div class="gk rv rv-d4" id="gatekeeper">
+      <div class="gk-t">🔓 This build isn't Apple-notarized yet — here's how to open it</div>
+      <p>macOS will say SpaceWise is from an "unidentified developer." That's expected for this beta, not a sign anything's wrong. <strong>Right-click (or Control-click) the app → Open → Open</strong> — you'll only need to do this once. Or go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. A fully notarized build with no warning at all is coming very soon.</p>
+    </div>
+
+    <!-- live scan simulation -->
+    <div class="stage rv rv-d4">
+      <div class="mock" id="mock">
+        <div class="mock-bar">
+          <span class="md" style="background:#FF5F57"></span>
+          <span class="md" style="background:#FEBC2E"></span>
+          <span class="md" style="background:#28C840"></span>
+          <span class="mock-title">SpaceWise</span>
+        </div>
+        <div class="mock-body">
+          <div class="side">
+            <div class="item active"><i>◧</i> Dashboard</div>
+            <div class="item"><i>◎</i> Findings</div>
+            <div class="item"><i>◷</i> History</div>
+            <div class="item"><i>⚙</i> Settings</div>
           </div>
-          <div class="mock-body">
-            <div class="mock-sidebar">
-              <div class="item active">📊 Dashboard</div>
-              <div class="item">🔍 Findings</div>
-              <div class="item">🕘 History</div>
-              <div class="item">⚙️ Settings</div>
-            </div>
-            <div class="mock-main">
-              <div class="mock-hero-card">
-                <div class="label">YOU CAN RECOVER</div>
-                <div class="value">54.2 GB</div>
-                <div class="mock-bar-track">
-                  <div style="width:52%;background:#2ECC71"></div>
-                  <div style="width:23%;background:#F5A623"></div>
-                  <div style="width:15%;background:#9AA5B1"></div>
-                  <div style="width:10%;background:#E94560"></div>
-                </div>
+          <div class="main">
+            <div class="hero-card">
+              <div class="lbl">You can recover</div>
+              <div class="val"><span id="cnt">0.0</span> GB</div>
+              <div class="track">
+                <i id="t1" style="background:linear-gradient(90deg,#3DD68C,#2FBF7A)"></i>
+                <i id="t2" style="background:linear-gradient(90deg,#F5A623,#E3A23C)"></i>
+                <i id="t3" style="background:rgba(246,241,232,.16)"></i>
               </div>
-              <div class="mock-cards">
-                <div class="mock-card"><div class="n">🧠 AI Tools</div><div class="s">28.4 GB</div></div>
-                <div class="mock-card"><div class="n">🔨 Developer</div><div class="s">14.1 GB</div></div>
-                <div class="mock-card"><div class="n">🌐 Browser</div><div class="s">6.8 GB</div></div>
+              <div class="legend">
+                <span><b style="background:#3DD68C"></b>Safe to remove</span>
+                <span><b style="background:#F5A623"></b>Review first</span>
+                <span><b style="background:rgba(246,241,232,.3)"></b>Leave alone</span>
               </div>
             </div>
+            <div class="scanline" id="scanline">Ready to scan.</div>
+            <div class="rows" id="rows"></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="story">
-    <div class="ambient-blob" style="width:420px;height:420px;background:radial-gradient(circle,rgba(227,162,60,0.18),transparent 70%);top:-140px;right:-100px;"></div>
-    <div class="wrap">
-      <div>
-        <h2>The bug we couldn't ignore</h2>
-        <p>macOS Storage reported <strong>65 GB</strong> used by "Applications." The Applications folder itself held only <strong>11 GB</strong>. The missing 54 GB turned out to be a wallpaper download cache, buried three folders deep in a system Library directory — invisible to Finder, invisible to Storage Management, invisible to every cleaner we tried.</p>
-        <p style="margin-top:14px;">No existing tool would have flagged it, let alone explained it. That gap — between what macOS reports and what you can actually find — is the whole reason SpaceWise exists.</p>
+<!-- ================= STATS ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat rv"><div class="n" data-to="63">0</div><div class="k">Classification rules</div></div>
+      <div class="stat rv rv-d1"><div class="n" data-to="1">0</div><div class="k">Network requests, total</div></div>
+      <div class="stat rv rv-d2"><div class="n" data-to="0">0</div><div class="k">Trackers or telemetry</div></div>
+      <div class="stat rv rv-d3"><div class="n" data-to="100" data-suffix="%">0</div><div class="k">Runs locally</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE STUDY ================= -->
+<section>
+  <div class="wrap">
+    <div class="case rv">
+      <span class="tag">The bug we couldn't ignore</span>
+      <div class="num">54 GB</div>
+      <h2 style="margin-top:10px">missing, and no way to find it</h2>
+      <p style="font-size:17px;max-width:720px">macOS Storage reported <strong style="color:var(--cream)">65 GB</strong> used by "Applications." The Applications folder itself held only <strong style="color:var(--cream)">11 GB</strong>. The missing 54 GB turned out to be a wallpaper download cache, buried three folders deep in a system Library directory — invisible to Finder, invisible to Storage Management, invisible to every cleaner we tried.</p>
+      <p style="margin-top:16px;font-size:17px;max-width:720px">That gap — between what macOS reports and what you can actually find — is the whole reason SpaceWise exists.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="wrap">
+    <div class="shead mid rv">
+      <span class="tag">Built differently, on purpose</span>
+      <h2>Explanation first. Deletion second.</h2>
+      <p>Most cleaners show you a number and a Clean button. SpaceWise shows you what the number is made of.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card rv"><div class="ic">💬</div><h3>Plain English, always</h3><p>Every item says what it is, why it's on your disk, and what actually happens if you remove it. No "Junk Files (12.4 GB)" with no way to tell what's inside.</p></div>
+      <div class="card rv rv-d1"><div class="ic">🛡️</div><h3>Safe by default</h3><p>Three ratings — Safe, Review first, Leave alone — from a rules database plus a separate safety engine. Anything unrecognized is never marked safe, and protected locations can't be one-click deleted at all.</p></div>
+      <div class="card rv rv-d2"><div class="ic">🧠</div><h3>Knows modern storage</h3><p>Ollama and LM Studio models, Hugging Face caches, DerivedData, Simulator runtimes, Docker images, npm and Homebrew caches — the things that quietly eat hundreds of gigabytes today.</p></div>
+      <div class="card rv"><div class="ic">🔍</div><h3>Nothing hidden</h3><p>Shows total disk used versus what it could categorize, and names the gap instead of pretending it doesn't exist. Installed apps are shown too — with no delete button, because uninstalling should be deliberate.</p></div>
+      <div class="card rv rv-d1"><div class="ic">↩️</div><h3>Reversible where it counts</h3><p>Unrecognized items go to the Trash rather than being erased, so a mistake stays a mistake and not a disaster. Every action is logged in History.</p></div>
+      <div class="card rv rv-d2"><div class="ic">⚡</div><h3>Fast, and honest about it</h3><p>Sizes come from blocks actually allocated on disk, not logical file sizes — so the totals are real numbers, not the inflated ones APFS makes easy to report.</p></div>
+    </div>
+
+    <div class="marquee rv" style="margin-top:44px">
+      <div class="mrow" id="mrow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="priv rv">
+      <span class="tag" style="color:var(--safe)">Privacy</span>
+      <h2>Only you and your Mac see this. No one else.</h2>
+      <p style="font-size:17px;max-width:700px">This isn't a positioning statement — it's how the app is built, and you can verify every line of it with a network monitor.</p>
+      <ul class="plist">
+        <li><span class="chk">✓</span><span><strong style="color:var(--cream)">Exactly one network request exists in the entire app</strong> — validating a license key, only if you choose to buy one. That's not a policy, it's the whole count.</span></li>
+        <li><span class="chk">✓</span><span><strong style="color:var(--cream)">No analytics, no telemetry, no crash reporting</strong>, no account, no sign-in, no email required to use it.</span></li>
+        <li><span class="chk">✓</span><span><strong style="color:var(--cream)">File contents are never opened or read.</strong> SpaceWise looks at names, paths, sizes and dates — never what's inside your files.</span></li>
+        <li><span class="chk">✓</span><span><strong style="color:var(--cream)">Everything stays on your Mac</strong>, in a local database you can delete at any time.</span></li>
+        <li><span class="chk">✓</span><span><strong style="color:var(--cream)">No rule-update phone-home.</strong> The classification database ships inside the app and only changes when you install a new version.</span></li>
+      </ul>
+      <div style="margin-top:26px"><a class="btn btn-ghost" href="privacy.html">Read the full privacy policy →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="shead mid rv">
+      <span class="tag">How it works</span>
+      <h2>Three steps, under 60 seconds</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv"><h3>Scan</h3><p>Grant Full Disk Access once, hit Scan. SpaceWise walks your disk and sizes what it finds by the blocks actually used — including the places macOS doesn't show you.</p></div>
+      <div class="step rv rv-d1"><h3>Understand</h3><p>Findings groups everything by safety rating with a plain-English explanation for each item. Read before you decide — that's the entire point.</p></div>
+      <div class="step rv rv-d2"><h3>Clean</h3><p>Tick what you want gone and confirm. Safe items are pre-selected, protected locations aren't selectable at all, and everything lands in History.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="shead mid rv">
+      <span class="tag">Pricing</span>
+      <h2>Simple, honest pricing</h2>
+      <p>Nothing is ever locked. Every feature works whether or not you pay — for individuals, this is an honor system, and we mean it.</p>
+    </div>
+    <div class="prices">
+      <div class="price feat rv">
+        <span class="badge">Individuals</span>
+        <h3>Personal use</h3>
+        <div class="amt">$29</div>
+        <div class="per">one-time · no subscription · yours forever</div>
+        <ul>
+          <li><span>✓</span>Every feature, unlocked from the first launch</li>
+          <li><span>✓</span>Free to keep using if you never pay</li>
+          <li><span>✓</span>A quiet reminder after 14 days — dismissible, never a wall</li>
+          <li><span>✓</span>No account, no sign-in, no recurring charge</li>
+        </ul>
+        <a class="btn btn-primary" href="https://spacewise.lemonsqueezy.com/checkout/buy/9ab5b417-66bc-48f8-8da5-e4cfc84dbf00">Support the work — $29</a>
       </div>
-      <div class="story-stats">
-        <div class="stat-card flag"><div class="big">54 GB</div><div class="cap">hidden in one wallpaper cache</div></div>
-        <div class="stat-card"><div class="big">63</div><div class="cap">built-in classification rules at launch</div></div>
-        <div class="stat-card"><div class="big">100%</div><div class="cap">local — nothing ever leaves your Mac</div></div>
-        <div class="stat-card"><div class="big">$29</div><div class="cap">one-time — own it forever</div></div>
+      <div class="price rv rv-d1">
+        <h3>Business use</h3>
+        <div class="amt">$15</div>
+        <div class="per">per seat / year</div>
+        <ul>
+          <li><span>✓</span>Identical app — the licence is a legal requirement, not a technical unlock</li>
+          <li><span>✓</span>Required for company-owned or company-managed Macs</li>
+          <li><span>✓</span>Straightforward per-seat billing</li>
+          <li><span>✓</span>Email us and we'll set it up</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://spacewise.lemonsqueezy.com/checkout/buy/7e39389d-449d-464a-b838-2f29cb6dbd22">Get a business licence</a>
       </div>
     </div>
-  </section>
+    <p style="text-align:center;margin-top:26px;font-size:14px;color:rgba(246,241,232,.45)">Individual purchases are a single $29 charge — no subscription, no recurring billing. Business licences are a per-seat annual subscription.</p>
+  </div>
+</section>
 
-  <section id="features">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">Why SpaceWise</div>
-        <h2>Built differently, on purpose</h2>
-        <p>Four principles that shape every decision in the product — the opposite of what the "Mac cleaner" category is known for.</p>
-      </div>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="ic">💬</div>
-          <h3>Explains before it deletes</h3>
-          <p>Every item includes a plain-English answer to what it is, why it's there, and what happens if it's deleted — not a bundle ID or a raw file path.</p>
-        </div>
-        <div class="pillar">
-          <div class="ic">🧠</div>
-          <h3>Built for how you use your Mac now</h3>
-          <p>The only cleaner that understands the modern causes of storage bloat: Ollama and LM Studio model folders, Xcode DerivedData, Docker images, node_modules sprawl.</p>
-        </div>
-        <div class="pillar">
-          <div class="ic">🔒</div>
-          <h3>Nothing leaves your Mac</h3>
-          <p>No cloud, no telemetry, no file content ever read — only paths and sizes. Fully local, and that's independently verifiable by watching network activity.</p>
-        </div>
-        <div class="pillar">
-          <div class="ic">🛡️</div>
-          <h3>Safe by default</h3>
-          <p>Every action is rated Safe, Caution, or Dangerous before you can act on it. Dangerous actions require explicit double confirmation. Always.</p>
-        </div>
-      </div>
-
-      <div class="ratings">
-        <span class="rating-chip"><span class="sw" style="background:#2ECC71"></span> Safe — clean freely</span>
-        <span class="rating-chip"><span class="sw" style="background:#F5A623"></span> Caution — review first</span>
-        <span class="rating-chip"><span class="sw" style="background:#9AA5B1"></span> Unknown — unrecognized</span>
-        <span class="rating-chip"><span class="sw" style="background:#E94560"></span> Dangerous — double confirm</span>
-      </div>
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="shead mid rv"><span class="tag">FAQ</span><h2>Common questions</h2></div>
+    <div class="faq">
+      <details class="qa rv"><summary>What data does SpaceWise send anywhere?</summary><div class="a">None, by default. SpaceWise reads file paths and sizes to figure out what's on disk — it never opens or reads file contents, and makes no network requests except an optional, explicit license check if you choose to activate a support license. You can verify this yourself with Little Snitch or Activity Monitor's network tab.</div></details>
+      <details class="qa rv"><summary>Why is "System Data" so large, and can SpaceWise explain all of it?</summary><div class="a">Not entirely — and we say so rather than pretending otherwise. Some of it (Time Machine local snapshots, the sealed system volume, swap space) is macOS-level overhead that no third-party tool can fully itemize, Apple's own Storage panel included. SpaceWise categorizes everything it legitimately can, and clearly labels the remainder instead of leaving it as an unexplained gap.</div></details>
+      <details class="qa rv"><summary>Why isn't this on the Mac App Store?</summary><div class="a">The App Store's subscription and in-app-purchase rules don't map cleanly onto an honor-system model where nothing is ever actually locked. Direct download keeps the model honest and keeps Apple's 15–30% commission out of a price that's already deliberately low. (The current build is a pre-notarization beta — see the instructions at the top of this page; a fully notarized build is coming very soon.)</div></details>
+      <details class="qa rv"><summary>How do the Safe / Review / Leave alone ratings work?</summary><div class="a">Every item is checked against a rules database and a separate safety engine with hard-coded protections for sensitive locations — Documents, Desktop, personal media, credentials like SSH keys and keychains, cloud-synced folders, and Messages and Mail data. Unrecognized items are always rated at least "Review first," never Safe by default, and protected locations can't be selected for one-click deletion no matter what a rule claims.</div></details>
+      <details class="qa rv"><summary>What are the system requirements?</summary><div class="a">macOS 14 (Sonoma) or later, on either Apple Silicon or Intel — the download is a universal binary. It needs Full Disk Access to see the folders macOS protects, which you grant once in System Settings.</div></details>
+      <details class="qa rv"><summary>My company wants to deploy this to 50 Macs — what do we do?</summary><div class="a">Business use requires a $15/seat/year license under our EULA — email us and we'll get you set up with simple per-seat billing. The app itself is identical to the Individual version; the license is a legal requirement, not a technical unlock.</div></details>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="privacy" class="trust">
-    <div class="wrap trust-grid">
-      <div class="trust-copy">
-        <div class="kicker" style="color:var(--coral);font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;">Privacy, in plain terms</div>
-        <h2>Only you and your Mac see this. No one else.</h2>
-        <p>No account, no sign-in, no server SpaceWise talks to in the background. Scanning happens entirely on your machine — the app never reads what's inside your files, only their paths and sizes, and it never sends either of those anywhere.</p>
-        <p>You don't have to take our word for it: open Activity Monitor's Network tab, or a tool like Little Snitch, while SpaceWise scans and cleans. You'll see nothing leave your Mac.</p>
-      </div>
-      <div class="trust-panel">
-        <div class="trust-row ok">
-          <span class="dot"></span>
-          <div><h4>Scanning &amp; cleaning</h4><p>100% local. Zero network requests, ever.</p></div>
-        </div>
-        <div class="trust-row ok">
-          <span class="dot"></span>
-          <div><h4>File contents</h4><p>Never read. SpaceWise only ever sees paths and sizes.</p></div>
-        </div>
-        <div class="trust-row one">
-          <span class="dot"></span>
-          <div><h4>The one exception</h4><p>Activating a support license sends just the license key to our payment processor to confirm it's valid — nothing about your files, and only when you choose to activate.</p></div>
-        </div>
-        <div class="trust-row ok">
-          <span class="dot"></span>
-          <div><h4>Verifiable</h4><p>Watch Activity Monitor or Little Snitch yourself — the claim is checkable, not just promised.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="how" class="steps">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">How it works</div>
-        <h2>Three steps, under 60 seconds</h2>
-      </div>
-      <div class="step-row">
-        <div class="step">
-          <div class="num">1</div>
-          <h3>Scan</h3>
-          <p>SpaceWise walks your home directory (or the full system, opt-in) and finds what's actually using your storage — including the folders Finder hides.</p>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <h3>Understand</h3>
-          <p>Every finding is matched against a rules database and explained in plain English, then grouped by category and safety rating. Even the storage SpaceWise can't individually list gets accounted for, not left as a mystery gap.</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <h3>Clean safely</h3>
-          <p>Select what you want gone. Safe items clean with one click; anything risky requires you to explicitly confirm before it's touched.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">Pricing</div>
-        <h2>Simple, honest pricing</h2>
-        <p>One-time for individuals. Simple per-seat annual billing for teams. No hidden fees, no surprise charges.</p>
-      </div>
-      <div class="pricing-grid" style="grid-template-columns:repeat(2,1fr);max-width:760px;margin:0 auto;">
-        <div class="price-card featured">
-          <span class="featured-badge">FOR INDIVIDUALS</span>
-          <h3>Individual</h3>
-          <div class="sub">For personal use, on your own Mac</div>
-          <div class="amount">$29</div>
-          <div class="per">one-time, not a subscription</div>
-          <ul>
-            <li>Every feature, unlocked, always</li>
-            <li>Unlimited scans, unlimited cleanups</li>
-            <li>100% local — no data ever leaves your Mac</li>
-            <li>Pay once, use forever — no renewals</li>
-            <li>14-day trial included before you buy</li>
-          </ul>
-          <a class="btn btn-primary" href="https://spacewise.lemonsqueezy.com/checkout/buy/9ab5b417-66bc-48f8-8da5-e4cfc84dbf00" target="_blank" rel="noopener">Buy now</a>
-        </div>
-        <div class="price-card">
-          <h3>Business</h3>
-          <div class="sub">Required for company-owned Macs</div>
-          <div class="amount">$15</div>
-          <div class="per">per seat, per year</div>
-          <ul>
-            <li>Everything in Individual</li>
-            <li>Licensed for commercial/company use</li>
-            <li>Priority email support, &lt;24h response</li>
-            <li>Simple per-seat billing, no procurement hassle</li>
-          </ul>
-          <a class="btn btn-ghost" href="https://spacewise.lemonsqueezy.com/checkout/buy/7e39389d-449d-464a-b838-2f29cb6dbd22" target="_blank" rel="noopener">Buy now</a>
-        </div>
-      </div>
-      <p class="price-note">Business use is a licensing requirement enforced by our EULA, not a technical restriction — the app itself is identical to the Individual version. We're trusting you, like WinRAR trusted a generation of IT departments.</p>
-    </div>
-  </section>
-
-  <section id="faq" style="background:#FAFBFF;">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">FAQ</div>
-        <h2>Common questions</h2>
-      </div>
-      <div class="faq">
-        <div class="faq-item">
-          <button class="faq-q">Is there a free trial? <span class="plus">+</span></button>
-          <div class="faq-a"><p>Yes — every feature is unlocked for 14 days so you can actually test it on your real Mac before paying anything. After that, a small reminder appears in two places (never during scanning) if you haven't activated a license yet. Individual is a one-time $29 purchase — no subscription, no recurring charge. (Business licenses are a per-seat annual subscription — see Pricing.)</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">What data does SpaceWise send anywhere? <span class="plus">+</span></button>
-          <div class="faq-a"><p>None, by default. SpaceWise reads file paths and sizes to figure out what's on disk — it never opens or reads file contents, and makes no network requests except an optional, explicit license-check if you choose to activate a support license. You can verify this yourself by watching Little Snitch or Activity Monitor's network tab.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Why is "System Data" so large, and can SpaceWise explain all of it? <span class="plus">+</span></button>
-          <div class="faq-a"><p>Not entirely — and we say so rather than pretending otherwise. Some of it (Time Machine local snapshots, the sealed system volume, swap space) is macOS-level overhead that no third-party tool can fully itemize, Apple's own Storage panel included. SpaceWise categorizes everything it legitimately can, and clearly labels the remainder instead of leaving it as an unexplained gap.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Why isn't this on the Mac App Store? <span class="plus">+</span></button>
-          <div class="faq-a"><p>The App Store's subscription and in-app-purchase rules don't map cleanly onto an honor-system model where nothing is ever actually locked. Direct download keeps the model honest and keeps Apple's 15–30% commission out of a price that's already deliberately low. (The current build is a pre-notarization beta — see the download instructions above; a fully notarized build is coming very soon.)</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">How do the Safe / Caution / Dangerous ratings work? <span class="plus">+</span></button>
-          <div class="faq-a"><p>Every item is checked against a rules database and a separate safety engine with hard-coded protections for sensitive system locations. Unrecognized items are always rated at least Caution — never Safe by default — and Dangerous items require an explicit, separate confirmation before anything is deleted.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">My company wants to deploy this to 50 Macs — what do we do? <span class="plus">+</span></button>
-          <div class="faq-a"><p>Business use requires a $15/seat/year license under our EULA — email us and we'll get you set up with simple per-seat billing. The app itself is identical to the Individual version; the license is a legal requirement, not a technical unlock.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta">
-    <div class="ambient-blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(227,162,60,0.16),transparent 70%);bottom:-160px;left:10%;"></div>
-    <div class="wrap">
+<!-- ================= CTA ================= -->
+<section>
+  <div class="wrap">
+    <div class="cta rv">
       <h2>Ready to see what's actually on your Mac?</h2>
-      <p>Download the beta build now — free to try, honor-system pricing, nothing hidden. A fully notarized build (no security warning) is coming very soon.</p>
-      <a class="btn btn-primary btn-lg" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">⬇ Download for Mac — v1.0 beta</a>
+      <p style="font-size:17.5px;max-width:560px;margin:0 auto 30px">Download the beta now — free to try, honor-system pricing, nothing hidden. A fully notarized build with no security warning is coming very soon.</p>
+      <a class="btn btn-primary btn-lg" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">↓&nbsp; Download for Mac — v1.0 beta</a>
+      <p style="margin-top:18px;font-size:13.5px;color:rgba(246,241,232,.45)">Universal · macOS 14+ · 3.5 MB</p>
     </div>
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
-  <div class="wrap footer-inner">
-    <a href="#top" class="brand" style="font-size:15px;">
-      <span class="brand-mark" style="width:24px;height:24px;"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/></svg></span>
+  <div class="wrap fin">
+    <a href="#top" class="brand" style="font-size:15px">
+      <span class="brand-mark" style="width:26px;height:26px"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/></svg></span>
       SpaceWise
     </a>
-    <div class="footer-links">
+    <div class="flinks">
       <a href="https://github.com/crawler-ebic/spacewise-site/releases/tag/v1.0-beta" target="_blank" rel="noopener">Release notes</a>
       <a href="mailto:asamy0754@gmail.com">Contact</a>
       <a href="privacy.html">Privacy</a>
@@ -574,32 +541,173 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
-    <div class="footer-copy">© 2026 SpaceWise. Privacy-first storage cleanup for macOS.</div>
+    <div class="fcopy">© 2026 SpaceWise. Privacy-first storage cleanup for macOS.</div>
   </div>
 </footer>
 
 <script>
-  document.querySelectorAll('.faq-q').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var item = btn.closest('.faq-item');
-      var answer = item.querySelector('.faq-a');
-      var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
-        if(openItem !== item){
-          openItem.classList.remove('open');
-          openItem.querySelector('.faq-a').style.maxHeight = null;
+(function(){
+  "use strict";
+  // Every animation below is decoration. If the visitor has asked their OS
+  // to reduce motion, the page still renders completely -- it just arrives
+  // already finished instead of animating into place.
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- scroll progress + nav state ---- */
+  var prog = document.getElementById("prog"), hdr = document.getElementById("hdr"), ticking = false;
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+    hdr.classList.toggle("solid", window.scrollY > 20);
+    ticking = false;
+  }
+  window.addEventListener("scroll", function(){
+    if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  onScroll();
+
+  /* ---- scroll reveal ---- */
+  var revealables = document.querySelectorAll(".rv");
+  if(still || !("IntersectionObserver" in window)){
+    revealables.forEach(function(el){ el.classList.add("on"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:"0px 0px -60px 0px"});
+    revealables.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- pointer-tracking glow on cards ---- */
+  if(!still){
+    document.querySelectorAll(".card").forEach(function(card){
+      card.addEventListener("pointermove", function(ev){
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (ev.clientX - r.left) + "px");
+        card.style.setProperty("--my", (ev.clientY - r.top) + "px");
+      });
+    });
+  }
+
+  /* ---- count-up stats ---- */
+  function countUp(el){
+    var target = parseFloat(el.dataset.to), suffix = el.dataset.suffix || "";
+    if(still || target === 0){ el.textContent = target + suffix; return; }
+    var start = performance.now(), dur = 1400;
+    (function frame(now){
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(p < 1) requestAnimationFrame(frame);
+    })(start);
+  }
+  var stats = document.querySelectorAll(".stat .n");
+  if("IntersectionObserver" in window){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); so.unobserve(e.target); } });
+    }, {threshold:.5});
+    stats.forEach(function(el){ so.observe(el); });
+  } else { stats.forEach(countUp); }
+
+  /* ---- marquee of what SpaceWise recognises ---- */
+  var apps = ["Ollama models","Hugging Face cache","LM Studio","Xcode DerivedData","iOS Simulators",
+    "Docker images","npm cache","Homebrew cache","Chrome cache","Safari cache","Slack","Zoom","Adobe CC",
+    "Photoshop","Lightroom","Final Cut proxies","Sketch","Figma","VS Code","Cursor","Gradle","CocoaPods",
+    "pip cache","Cargo registry","Go build cache","Android AVDs","Stable Diffusion","GPT4All"];
+  var mrow = document.getElementById("mrow");
+  if(mrow){
+    var html = apps.map(function(a){ return '<span class="chip">'+a+'</span>'; }).join("");
+    mrow.innerHTML = html + html; // duplicated so the -50% loop is seamless
+  }
+
+  /* ---- hero scan simulation ----
+     An illustration of the real Findings flow, not live data. Sizes shown
+     are from the wallpaper-cache case study described further down the
+     page, so the number in the mock matches the story being told. ---- */
+  var items = [
+    {n:"Wallpaper download cache",      s:"38.4 GB", r:"safe"},
+    {n:"Xcode DerivedData",             s:"7.2 GB",  r:"caution"},
+    {n:"Ollama — llama3 & mistral",     s:"5.1 GB",  r:"caution"},
+    {n:"Chrome cache",                  s:"2.1 GB",  r:"safe"},
+    {n:"Hugging Face cache",            s:"1.4 GB",  r:"safe"},
+    {n:"Documents",                     s:"—",       r:"danger"}
+  ];
+  var paths = ["~/Library/Caches/com.apple.wallpaper","~/Library/Developer/Xcode/DerivedData",
+    "~/.ollama/models","~/Library/Caches/Google/Chrome","~/.cache/huggingface","/Applications"];
+
+  var rows = document.getElementById("rows"), cnt = document.getElementById("cnt"),
+      line = document.getElementById("scanline"), mock = document.getElementById("mock");
+
+  function renderAll(){
+    rows.innerHTML = items.map(function(it){
+      var label = it.r === "safe" ? "Safe" : it.r === "caution" ? "Review" : "Protected";
+      return '<div class="row in"><span class="pill '+it.r+'">'+label+'</span>'+
+             '<span class="nm">'+it.n+'</span><span class="sz">'+it.s+'</span></div>';
+    }).join("");
+    cnt.textContent = "54.2";
+    document.getElementById("t1").style.width = "52%";
+    document.getElementById("t2").style.width = "23%";
+    document.getElementById("t3").style.width = "25%";
+    line.textContent = "Scan complete — 6 items found";
+  }
+
+  function runScan(){
+    rows.innerHTML = "";
+    var i = 0, total = 0;
+    var targets = [38.4, 7.2, 5.1, 2.1, 1.4, 0];
+    line.textContent = "Scanning " + paths[0] + "…";
+
+    (function step(){
+      if(i >= items.length){
+        line.textContent = "Scan complete — " + items.length + " items found";
+        document.getElementById("t1").style.width = "52%";
+        document.getElementById("t2").style.width = "23%";
+        document.getElementById("t3").style.width = "25%";
+        return;
+      }
+      var it = items[i];
+      var label = it.r === "safe" ? "Safe" : it.r === "caution" ? "Review" : "Protected";
+      var el = document.createElement("div");
+      el.className = "row in";
+      el.innerHTML = '<span class="pill '+it.r+'">'+label+'</span>'+
+                     '<span class="nm">'+it.n+'</span><span class="sz">'+it.s+'</span>';
+      rows.appendChild(el);
+      line.textContent = "Scanning " + paths[Math.min(i+1, paths.length-1)] + "…";
+
+      // Only Safe/Review items count toward what's recoverable -- protected
+      // locations never do, which is exactly how the app behaves.
+      var from = total; total += targets[i];
+      var t0 = performance.now();
+      (function tick(now){
+        var p = Math.min((now - t0)/460, 1);
+        cnt.textContent = (from + (total - from) * (1 - Math.pow(1-p,3))).toFixed(1);
+        if(p < 1) requestAnimationFrame(tick);
+      })(t0);
+
+      i++;
+      setTimeout(step, 620);
+    })();
+  }
+
+  if(still){
+    renderAll();
+  } else if("IntersectionObserver" in window){
+    var started = false;
+    var mo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting && !started){
+          started = true;
+          mock.classList.add("lifted");
+          setTimeout(runScan, 520);
         }
       });
-      if(isOpen){
-        item.classList.remove('open');
-        answer.style.maxHeight = null;
-      } else {
-        item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
-    });
-  });
+    }, {threshold:.28});
+    mo.observe(mock);
+  } else {
+    renderAll();
+  }
+})();
 </script>
-
 </body>
 </html>
