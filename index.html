@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Finds hidden storage on your Mac and explains it in plain English before it lets you clean it. 100% local, zero telemetry.">
 <meta name="twitter:image" content="https://crawler-ebic.github.io/spacewise-site/og-image.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23232B36%22/><path d=%22M30 62 L50 30 L70 62 Z%22 fill=%22%23E3A23C%22/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23F6F1E8%22/><rect x=%2214%22 y=%2258%22 width=%2247%22 height=%2217%22 fill=%22%23171D24%22/><rect x=%2225%22 y=%2240%22 width=%2247%22 height=%2217%22 fill=%22%23E3A23C%22/><rect x=%2236%22 y=%2222%22 width=%2247%22 height=%2217%22 fill=%22%23232B36%22/></svg>">
 
 <script type="application/ld+json">
 {
@@ -88,9 +88,9 @@ header{position:fixed;top:0;left:0;right:0;z-index:150;transition:all .4s var(--
 header.solid{background:rgba(18,23,29,.76);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;letter-spacing:-.02em;text-decoration:none}
-.brand-mark{width:31px;height:31px;border-radius:9px;background:linear-gradient(140deg,var(--navy-bright),var(--navy));display:grid;place-items:center;box-shadow:0 3px 14px rgba(0,0,0,.4);overflow:hidden;position:relative}
-.brand-mark svg{width:70%;height:70%;position:relative;z-index:1}
-.brand-mark::after{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(227,162,60,.28),transparent 60%)}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--cream);display:grid;place-items:center;box-shadow:0 3px 14px rgba(0,0,0,.4);overflow:hidden;position:relative;padding:5px}
+.brand-mark svg{width:100%;height:100%;position:relative;z-index:1}
+
 .nav-links{display:flex;gap:30px;font-size:14.5px}
 .nav-links a{color:rgba(246,241,232,.66);text-decoration:none;transition:color .25s;position:relative}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--coral);transition:width .3s var(--ease)}
@@ -167,6 +167,50 @@ header.solid{background:rgba(18,23,29,.76);backdrop-filter:blur(18px) saturate(1
 .pill.danger{background:rgba(242,102,90,.16);color:var(--danger)}
 .row .nm{flex:1;font-size:13.5px;color:rgba(246,241,232,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .sz{font-size:13px;font-weight:640;color:var(--cream);font-variant-numeric:tabular-nums}
+
+
+/* ---------- brand stack (wordmark + tagline) ---------- */
+.bstack{display:flex;flex-direction:column;line-height:1.05}
+.bstack em{font-style:normal;font-size:9.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--coral);opacity:.85;margin-top:2px}
+
+/* ---------- tick / cross lists ---------- */
+.ticks{list-style:none;display:grid;gap:10px;margin:0}
+.ticks li{display:flex;gap:11px;align-items:flex-start;font-size:14.6px;color:rgba(246,241,232,.76);line-height:1.5}
+.ticks.sm li{font-size:14px}
+.ticks span{flex-shrink:0;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+  font-size:11px;font-weight:800;margin-top:1px}
+.ticks .t{background:rgba(61,214,140,.15);color:var(--safe)}
+.ticks .x{background:rgba(242,102,90,.15);color:var(--danger)}
+.ticks .c{background:rgba(227,162,60,.16);color:var(--coral);font-size:11.5px}
+.ticks code{font-family:var(--mono);font-size:12.5px;background:rgba(246,241,232,.07);
+  border-radius:5px;padding:1px 6px;color:var(--coral-lit)}
+
+/* ---------- lead capture ---------- */
+.leadbox{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;
+  border-radius:var(--r-xl);padding:clamp(30px,4.4vw,54px);
+  background:linear-gradient(150deg,rgba(74,125,190,.1),rgba(227,162,60,.05));
+  border:1px solid rgba(74,125,190,.24)}
+.leadcopy h2{font-size:clamp(26px,3.4vw,38px)}
+.leadcopy p{font-size:16px}
+.fineprint{font-size:13.5px!important;color:rgba(246,241,232,.5)!important;margin-top:14px}
+.leadform{display:flex;flex-direction:column;gap:7px}
+.fl{font-size:12.5px;font-weight:640;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(246,241,232,.55);margin-top:8px}
+.fi{width:100%;padding:13px 15px;border-radius:11px;font-size:15.5px;font-family:inherit;
+  background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--cream);transition:border-color .25s,background .25s}
+.fi:focus{outline:none;border-color:var(--coral);background:rgba(0,0,0,.4)}
+.fi::placeholder{color:rgba(246,241,232,.32)}
+select.fi{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23E3A23C' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:12px;padding-right:40px}
+select.fi option{background:var(--navy);color:var(--cream)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.leadform .btn{margin-top:14px;justify-content:center}
+.formmsg{font-size:14px;margin-top:6px;min-height:20px}
+.formmsg.ok{color:var(--safe)}
+.formmsg.err{color:var(--danger)}
+@media(max-width:860px){.leadbox{grid-template-columns:1fr;gap:28px}}
 
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
@@ -303,13 +347,14 @@ footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24
 <header id="hdr">
   <div class="wrap nav">
     <a href="#top" class="brand">
-      <span class="brand-mark"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/><circle cx="50" cy="70" r="5" fill="#E3A23C"/></svg></span>
-      SpaceWise
+      <span class="brand-mark"><svg viewBox="-7 -5 110 90"><rect x="-4" y="54" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="11" y="29" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="26" y="4" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="0" y="50" width="65" height="24" fill="#171D24"/><rect x="15" y="25" width="65" height="24" fill="#E3A23C"/><rect x="30" y="0" width="65" height="24" fill="#232B36"/></svg></span>
+      <span class="bstack">SpaceWise<em>Local storage transparency</em></span>
     </a>
     <nav class="nav-links">
       <a href="#features">Features</a>
       <a href="#privacy">Privacy</a>
       <a href="#how">How it works</a>
+      <a href="compare.html">Compare</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -410,20 +455,137 @@ footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24
     <div class="shead mid rv">
       <span class="tag">Built differently, on purpose</span>
       <h2>Explanation first. Deletion second.</h2>
-      <p>Most cleaners show you a number and a Clean button. SpaceWise shows you what the number is made of.</p>
+      <p>Most cleaners show you a number and a Clean button. SpaceWise shows you what the number is made of — and refuses to delete the things it can't justify.</p>
     </div>
     <div class="grid g3">
       <div class="card rv"><div class="ic">💬</div><h3>Plain English, always</h3><p>Every item says what it is, why it's on your disk, and what actually happens if you remove it. No "Junk Files (12.4 GB)" with no way to tell what's inside.</p></div>
-      <div class="card rv rv-d1"><div class="ic">🛡️</div><h3>Safe by default</h3><p>Three ratings — Safe, Review first, Leave alone — from a rules database plus a separate safety engine. Anything unrecognized is never marked safe, and protected locations can't be one-click deleted at all.</p></div>
+      <div class="card rv rv-d1"><div class="ic">🛡️</div><h3>Safe by default</h3><p>Three ratings — Safe, Review first, Leave alone — from a rules database <em>plus</em> an independent safety engine. Anything unrecognised is never marked safe, and protected locations can't be one-click deleted at all.</p></div>
       <div class="card rv rv-d2"><div class="ic">🧠</div><h3>Knows modern storage</h3><p>Ollama and LM Studio models, Hugging Face caches, DerivedData, Simulator runtimes, Docker images, npm and Homebrew caches — the things that quietly eat hundreds of gigabytes today.</p></div>
-      <div class="card rv"><div class="ic">🔍</div><h3>Nothing hidden</h3><p>Shows total disk used versus what it could categorize, and names the gap instead of pretending it doesn't exist. Installed apps are shown too — with no delete button, because uninstalling should be deliberate.</p></div>
-      <div class="card rv rv-d1"><div class="ic">↩️</div><h3>Reversible where it counts</h3><p>Unrecognized items go to the Trash rather than being erased, so a mistake stays a mistake and not a disaster. Every action is logged in History.</p></div>
-      <div class="card rv rv-d2"><div class="ic">⚡</div><h3>Fast, and honest about it</h3><p>Sizes come from blocks actually allocated on disk, not logical file sizes — so the totals are real numbers, not the inflated ones APFS makes easy to report.</p></div>
+      <div class="card rv"><div class="ic">🔍</div><h3>Nothing hidden</h3><p>Shows total disk used versus what it could categorise, and names the gap instead of pretending it doesn't exist. Installed apps are shown too — with no delete button, because uninstalling should be deliberate.</p></div>
+      <div class="card rv rv-d1"><div class="ic">↩️</div><h3>Reversible where it counts</h3><p>Unrecognised items go to the Trash rather than being erased, so a mistake stays a mistake and not a disaster. Every action is logged in History.</p></div>
+      <div class="card rv rv-d2"><div class="ic">⚡</div><h3>Real numbers, not inflated ones</h3><p>Sizes come from blocks actually allocated on disk, not logical file sizes. On APFS, cloned files each report their full size — summing those is how other tools show impossible totals.</p></div>
     </div>
 
     <div class="marquee rv" style="margin-top:44px">
       <div class="mrow" id="mrow"></div>
     </div>
+  </div>
+</section>
+
+<!-- ================= WHAT IT PROTECTS ================= -->
+<section id="safety">
+  <div class="wrap">
+    <div class="shead mid rv">
+      <span class="tag">The safety engine</span>
+      <h2>It's built to protect you from itself</h2>
+      <p>A cleaner is only as good as the things it refuses to touch. These protections are hard-coded and sit <em>above</em> the rules database — a rule can never override them, no matter what it claims.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card rv">
+        <h3 style="color:var(--danger)">Never one-click deletable</h3>
+        <p style="margin-bottom:14px">No rule can mark any of this safe, and none of it can be selected for cleanup:</p>
+        <ul class="ticks">
+          <li><span class="x">✕</span>Documents and Desktop</li>
+          <li><span class="x">✕</span>Photos, Movies and Music — irreplaceable personal media</li>
+          <li><span class="x">✕</span>SSH keys, GPG keys, AWS credentials, Keychains</li>
+          <li><span class="x">✕</span>iCloud Drive, Dropbox, Google Drive, OneDrive — where a local delete syncs everywhere</li>
+          <li><span class="x">✕</span>Mail and Messages history</li>
+          <li><span class="x">✕</span>iPhone and iPad backups</li>
+          <li><span class="x">✕</span>Installed applications — shown and sized, never one-click removed</li>
+        </ul>
+      </div>
+      <div class="card rv rv-d1">
+        <h3 style="color:var(--safe)">How it decides</h3>
+        <p style="margin-bottom:14px">Every deletion runs an ordered chain of checks, and any one of them stops it:</p>
+        <ul class="ticks">
+          <li><span class="c">1</span>Full Disk Access is re-confirmed — permissions can be revoked mid-session</li>
+          <li><span class="c">2</span>The path is re-checked for existence</li>
+          <li><span class="c">3</span>Symlinks are resolved first, so a link pointing into Documents is caught</li>
+          <li><span class="c">4</span>The resolved path must be inside your home folder or an external volume</li>
+          <li><span class="c">5</span>Protection is re-derived from the path itself, not trusted from the database</li>
+          <li><span class="c">6</span>Anything rated Leave alone is refused outright</li>
+        </ul>
+        <p style="margin-top:14px;font-size:14px;color:rgba(246,241,232,.55)">Path matching is case-insensitive, resolves <code>..</code>, normalises Unicode and compares on folder boundaries — because on a Mac <code>~/documents</code> and <code>~/Documents</code> are the same folder, and a naive check gets that wrong.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVERYTHING IN THE APP ================= -->
+<section id="everything">
+  <div class="wrap">
+    <div class="shead mid rv">
+      <span class="tag">Everything in the app</span>
+      <h2>The full picture</h2>
+      <p>No feature gates, no Pro tier. Every one of these works from the first launch, whether or not you ever pay.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card rv">
+        <div class="ic">◧</div><h3>Dashboard</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Recoverable space, honestly counted</li>
+          <li><span class="t">✓</span>Breakdown by category with sizes</li>
+          <li><span class="t">✓</span>Disk-usage reconciliation — used vs. explained</li>
+          <li><span class="t">✓</span>Live scan progress that survives switching tabs</li>
+          <li><span class="t">✓</span>Guided tour on first visit, replayable any time</li>
+        </ul>
+      </div>
+      <div class="card rv rv-d1">
+        <div class="ic">◎</div><h3>Findings</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Grouped by safety rating, largest first</li>
+          <li><span class="t">✓</span>Plain-English explanation per item</li>
+          <li><span class="t">✓</span>Safe items pre-selected, protected ones not selectable</li>
+          <li><span class="t">✓</span>Reveal in Finder for anything view-only</li>
+          <li><span class="t">✓</span>Cleans many items concurrently, not one by one</li>
+        </ul>
+      </div>
+      <div class="card rv rv-d2">
+        <div class="ic">◷</div><h3>History</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Every cleanup logged with what and how much</li>
+          <li><span class="t">✓</span>Per-scan record with duration and totals</li>
+          <li><span class="t">✓</span>Clear history whenever you want</li>
+          <li><span class="t">✓</span>Stored locally in SQLite — never uploaded</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <div class="ic">⚙</div><h3>Settings</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Plain-language privacy and data section</li>
+          <li><span class="t">✓</span>Full Disk Access status with a fix-it link</li>
+          <li><span class="t">✓</span>Build verification — confirms the signature is ours</li>
+          <li><span class="t">✓</span>Ignore paths you never want scanned</li>
+          <li><span class="t">✓</span>Licence activation and deactivation</li>
+        </ul>
+      </div>
+      <div class="card rv rv-d1">
+        <div class="ic">🗂️</div><h3>Cleanup strategies</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Empty a cache folder but keep the folder</li>
+          <li><span class="t">✓</span>Move to Trash for anything reversible</li>
+          <li><span class="t">✓</span>Delete outright where it's genuinely disposable</li>
+          <li><span class="t">✓</span><code>docker system prune</code> for Docker's own disk image</li>
+          <li><span class="t">✓</span><code>simctl delete</code> for individual iOS Simulators</li>
+        </ul>
+      </div>
+      <div class="card rv rv-d2">
+        <div class="ic">🔒</div><h3>Privacy &amp; licensing</h3>
+        <ul class="ticks sm">
+          <li><span class="t">✓</span>Exactly one network request in the whole app</li>
+          <li><span class="t">✓</span>No analytics, telemetry or crash reporting</li>
+          <li><span class="t">✓</span>Licence key stored in the macOS Keychain</li>
+          <li><span class="t">✓</span>14 days completely silent, then one dismissible nudge</li>
+          <li><span class="t">✓</span>No account, no sign-in, no email required</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:34px" class="rv">
+      <a class="btn btn-ghost" href="compare.html">See how it compares to other Mac cleaners →</a>
+    </p>
   </div>
 </section>
 
@@ -515,6 +677,42 @@ footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24
   </div>
 </section>
 
+<!-- ================= LEAD CAPTURE ================= -->
+<section id="updates">
+  <div class="wrap">
+    <div class="leadbox rv">
+      <div class="leadcopy">
+        <span class="tag">Stay in the loop</span>
+        <h2>Get told when the notarized build lands</h2>
+        <p>The current download is a beta that macOS flags as unidentified. The notarized version opens with no warning at all. Leave your email and you'll hear the day it ships — plus new storage types as they're added to the rules database.</p>
+        <p class="fineprint">One email when it matters. No newsletter, no drip sequence, no sharing your address with anyone. Unsubscribe in one click, and it would be strange to run a privacy-first app any other way.</p>
+      </div>
+
+      <form class="leadform" id="leadform" novalidate>
+        <label class="fl" for="lead-email">Email address</label>
+        <input class="fi" type="email" id="lead-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+
+        <label class="fl" for="lead-role">What brings you here? <span style="opacity:.55;font-weight:400">(optional)</span></label>
+        <select class="fi" id="lead-role" name="role">
+          <option value="">Choose one…</option>
+          <option>My Mac keeps running out of space</option>
+          <option>I'm a developer — caches and build folders</option>
+          <option>I work with AI models locally</option>
+          <option>Creative work — video, photo, design</option>
+          <option>I manage Macs for a company</option>
+          <option>Just curious</option>
+        </select>
+
+        <!-- Bots fill hidden fields; humans never see this one. -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+
+        <button class="btn btn-primary btn-lg" type="submit" id="leadbtn">Notify me at launch</button>
+        <p class="formmsg" id="formmsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 <section>
   <div class="wrap">
@@ -531,12 +729,13 @@ footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24
 <footer>
   <div class="wrap fin">
     <a href="#top" class="brand" style="font-size:15px">
-      <span class="brand-mark" style="width:26px;height:26px"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/></svg></span>
+      <span class="brand-mark" style="width:26px;height:26px"><svg viewBox="-7 -5 110 90"><rect x="-4" y="54" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="11" y="29" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="26" y="4" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="0" y="50" width="65" height="24" fill="#171D24"/><rect x="15" y="25" width="65" height="24" fill="#E3A23C"/><rect x="30" y="0" width="65" height="24" fill="#232B36"/></svg></span>
       SpaceWise
     </a>
     <div class="flinks">
       <a href="https://github.com/crawler-ebic/spacewise-site/releases/tag/v1.0-beta" target="_blank" rel="noopener">Release notes</a>
       <a href="mailto:asamy0754@gmail.com">Contact</a>
+      <a href="compare.html">Compare</a>
       <a href="install.html">Install guide</a>
       <a href="privacy.html">Privacy</a>
       <a href="eula.html">License terms</a>
@@ -621,6 +820,58 @@ footer{border-top:1px solid var(--line);padding:40px 0;background:rgba(0,0,0,.24
   if(mrow){
     var html = apps.map(function(a){ return '<span class="chip">'+a+'</span>'; }).join("");
     mrow.innerHTML = html + html; // duplicated so the -50% loop is seamless
+  }
+
+
+  /* ---- lead capture ----
+     Posts to Formspree. Replace FORM_ID below with the id from your own
+     form at formspree.io (free tier is fine to start). Until that's set,
+     the form says so plainly rather than silently swallowing addresses --
+     a signup form that looks like it worked but didn't is worse than one
+     that admits it isn't wired up. ---- */
+  var FORM_ID = 'FORMSPREE_ID_HERE';
+  var form = document.getElementById('leadform');
+  if (form) {
+    var msg = document.getElementById('formmsg');
+    var btn = document.getElementById('leadbtn');
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var email = document.getElementById('lead-email').value.trim();
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.className = 'formmsg err';
+        msg.textContent = 'That email address doesn\u2019t look right.';
+        return;
+      }
+      if (FORM_ID === 'FORMSPREE_ID_HERE') {
+        msg.className = 'formmsg err';
+        msg.innerHTML = 'The signup form isn\u2019t connected yet \u2014 email ' +
+          '<a href="mailto:asamy0754@gmail.com?subject=Notify%20me%20when%20SpaceWise%20launches" style="color:var(--coral-lit)">asamy0754@gmail.com</a>' +
+          ' and you\u2019ll be added by hand.';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Sending\u2026';
+      msg.className = 'formmsg';
+      msg.textContent = '';
+      fetch('https://formspree.io/f/' + FORM_ID, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        form.reset();
+        msg.className = 'formmsg ok';
+        msg.textContent = 'Done \u2014 you\u2019ll hear from us the day the notarized build ships.';
+        btn.textContent = 'Notify me at launch';
+        btn.disabled = false;
+      }).catch(function () {
+        msg.className = 'formmsg err';
+        msg.innerHTML = 'That didn\u2019t go through. Email ' +
+          '<a href="mailto:asamy0754@gmail.com" style="color:var(--coral-lit)">asamy0754@gmail.com</a> instead and we\u2019ll add you.';
+        btn.textContent = 'Notify me at launch';
+        btn.disabled = false;
+      });
+    });
   }
 
   /* ---- hero scan simulation ----

@@ -15,8 +15,8 @@ a{color:var(--coral);}
 a:hover{color:var(--coral-lit);}
 header.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line);margin-bottom:44px;}
 .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;letter-spacing:-.02em;text-decoration:none;color:var(--cream);}
-.brand-mark{width:31px;height:31px;border-radius:9px;background:linear-gradient(140deg,var(--navy-bright),var(--navy));display:grid;place-items:center;}
-.brand-mark svg{width:70%;height:70%;}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--cream);display:grid;place-items:center;padding:5px;}
+.brand-mark svg{width:100%;height:100%;}
 .nav a:not(.brand){color:rgba(246,241,232,.6);text-decoration:none;font-size:14.5px;}
 .nav a:not(.brand):hover{color:var(--cream);}
 h1{font-size:clamp(30px,5vw,40px);letter-spacing:-.035em;margin-bottom:8px;font-weight:680;line-height:1.12;}

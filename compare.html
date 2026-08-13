@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceWise vs CleanMyMac, DaisyDisk and macOS Storage — an honest comparison</title>
+<meta name="description" content="How SpaceWise compares to CleanMyMac, DaisyDisk, OnyX and the storage tools built into macOS — including where the others are genuinely better.">
+<link rel="canonical" href="https://crawler-ebic.github.io/spacewise-site/compare.html">
+<meta property="og:title" content="SpaceWise vs CleanMyMac, DaisyDisk and macOS Storage">
+<meta property="og:description" content="An honest comparison of Mac storage tools — including where the alternatives are better.">
+<meta property="og:image" content="https://crawler-ebic.github.io/spacewise-site/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23F6F1E8%22/><rect x=%2214%22 y=%2258%22 width=%2247%22 height=%2217%22 fill=%22%23171D24%22/><rect x=%2225%22 y=%2240%22 width=%2247%22 height=%2217%22 fill=%22%23E3A23C%22/><rect x=%2236%22 y=%2222%22 width=%2247%22 height=%2217%22 fill=%22%23232B36%22/></svg>">
+<link rel="stylesheet" href="legal.css">
+<style>
+body{max-width:1080px}
+.tablewrap{overflow-x:auto;margin:26px 0;border:1px solid var(--line);border-radius:16px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:rgba(246,241,232,.05);font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+  color:rgba(246,241,232,.6);font-weight:640;position:sticky;top:0}
+thead th:first-child{width:210px}
+tbody tr:last-child td{border-bottom:none}
+td.us{background:rgba(227,162,60,.07)}
+th.us{background:rgba(227,162,60,.13);color:var(--coral-lit)}
+.yes{color:#3DD68C;font-weight:640}
+.no{color:rgba(246,241,232,.38)}
+.part{color:#F5A623}
+.rowlbl{color:var(--cream);font-weight:600}
+.cards{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin:26px 0}
+.vcard{padding:26px 24px;border-radius:18px;background:rgba(246,241,232,.04);border:1px solid var(--line)}
+.vcard h3{margin-top:0;display:flex;align-items:center;gap:10px}
+.vcard .price{font-size:14px;color:var(--coral);font-weight:620;margin-bottom:12px}
+.verdict{border-radius:16px;padding:18px 22px;margin-top:14px;font-size:14.5px;
+  background:rgba(61,214,140,.07);border:1px solid rgba(61,214,140,.22)}
+.verdict strong{color:var(--cream)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="/" class="brand">
+    <span class="brand-mark"><svg viewBox="-7 -5 110 90" xmlns="http://www.w3.org/2000/svg"><rect x="-4" y="54" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="11" y="29" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="26" y="4" width="65" height="24" fill="none" stroke="#20242B" stroke-width="2.5"/><rect x="0" y="50" width="65" height="24" fill="#171D24"/><rect x="15" y="25" width="65" height="24" fill="#E3A23C"/><rect x="30" y="0" width="65" height="24" fill="#232B36"/></svg></span>
+    SpaceWise
+  </a>
+  <a href="/">← Back to home</a>
+</header>
+
+<h1>SpaceWise vs. the alternatives</h1>
+<p class="updated">Last checked 13 August 2026 · prices taken from each vendor's own site</p>
+
+<div class="callout">
+  <strong>How to read this page.</strong> Every competitor here is a real, well-made product, and two of them are better than SpaceWise at the thing they're built for. This page says so explicitly, because a comparison that finds the author winning every row isn't a comparison — it's an advert. Prices change; the links go straight to each vendor so you can check.
+</div>
+
+<h2>The short version</h2>
+
+<div class="cards">
+  <div class="vcard">
+    <h3>DaisyDisk</h3>
+    <div class="price">$9.99 one-time · <a href="https://daisydiskapp.com/support/pricing">their pricing</a></div>
+    <p>The best visual map of your disk, full stop. A gorgeous sunburst that makes big files obvious in seconds, and it excludes clones and hard links so its numbers are honest.</p>
+    <p><strong>Where it stops:</strong> it shows you <em>where</em> space went, not <em>what</em> any of it is. Faced with <code>~/Library/Caches/com.apple.iconservices</code> at 3 GB, you still have to know whether deleting it is fine. That knowledge is exactly the gap SpaceWise fills.</p>
+  </div>
+  <div class="vcard">
+    <h3>CleanMyMac</h3>
+    <div class="price">From $3.33/month, subscription · <a href="https://macpaw.com/cleanmymac">their site</a></div>
+    <p>The most complete suite: cleaning, malware scanning, an uninstaller, performance tools, duplicate finder, cloud cleanup. Polished, notarized, and backed by a large company.</p>
+    <p><strong>Where it stops:</strong> it's a subscription, it's a much bigger surface than "find my disk space," and its cleaning is largely one-button — you're trusting the verdict rather than reading the reasoning.</p>
+  </div>
+  <div class="vcard">
+    <h3>macOS Storage settings</h3>
+    <div class="price">Free, already installed</div>
+    <p>Built in, safe, and enough for many people. Offloads unused apps, empties Trash automatically, shows large files.</p>
+    <p><strong>Where it stops:</strong> the "System Data" bucket is famously unexplained, and it can't see most developer or AI caches at all. This is the gap that made us build SpaceWise: 65 GB reported under "Applications," 11 GB actually in the folder.</p>
+  </div>
+</div>
+
+<h2>Feature by feature</h2>
+
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th class="us">SpaceWise</th>
+      <th>DaisyDisk</th>
+      <th>CleanMyMac</th>
+      <th>macOS built-in</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="rowlbl">Price</td>
+      <td class="us">$29 one-time, and free forever if you don't pay</td>
+      <td>$9.99 one-time</td>
+      <td>From $3.33/mo, subscription</td>
+      <td>Free</td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Explains what each item <em>is</em>, in plain English</td>
+      <td class="us"><span class="yes">Yes</span> — the entire point</td>
+      <td><span class="no">No</span> — shows paths and sizes</td>
+      <td><span class="part">Partly</span> — categories, not per-item reasoning</td>
+      <td><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Per-item safety rating</td>
+      <td class="us"><span class="yes">Safe / Review / Leave alone</span></td>
+      <td><span class="part">System files safeguarded</span></td>
+      <td><span class="part">Decides for you</span></td>
+      <td><span class="no">n/a</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Hard-coded protection for credentials, cloud-synced folders, personal media</td>
+      <td class="us"><span class="yes">Yes</span> — cannot be overridden by a rule</td>
+      <td><span class="part">System paths only</span></td>
+      <td><span class="part">Not published</span></td>
+      <td><span class="yes">Yes</span> — it barely deletes anything</td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Visual disk map</td>
+      <td class="us"><span class="part">Category breakdown, no sunburst</span></td>
+      <td><span class="yes">Best in class</span></td>
+      <td><span class="part">Basic</span></td>
+      <td><span class="part">Basic bar</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Knows AI model caches (Ollama, LM Studio, Hugging Face)</td>
+      <td class="us"><span class="yes">Yes</span> — named individually</td>
+      <td><span class="part">Visible as folders</span></td>
+      <td><span class="no">Not specifically</span></td>
+      <td><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Knows developer caches (DerivedData, Simulators, Docker, npm)</td>
+      <td class="us"><span class="yes">Yes</span>, incl. <code>docker prune</code> and <code>simctl delete</code></td>
+      <td><span class="part">Visible as folders</span></td>
+      <td><span class="part">Some</span></td>
+      <td><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Explains the gap between disk used and what it can identify</td>
+      <td class="us"><span class="yes">Yes</span> — named, not hidden</td>
+      <td><span class="yes">Yes</span> — incl. hidden space</td>
+      <td><span class="no">No</span></td>
+      <td><span class="no">No</span> — this is the "System Data" problem</td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Malware scanning</td>
+      <td class="us"><span class="no">No</span> — out of scope</td>
+      <td><span class="no">No</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="part">XProtect, in the OS</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">App uninstaller / duplicate finder</td>
+      <td class="us"><span class="no">No</span></td>
+      <td><span class="no">No</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="part">Offload unused apps</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Sizes by blocks actually allocated (APFS-clone aware)</td>
+      <td class="us"><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="part">Not published</span></td>
+      <td><span class="yes">Yes</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Telemetry / analytics</td>
+      <td class="us"><span class="yes">None</span> — one network call in the whole app</td>
+      <td><span class="yes">None claimed</span></td>
+      <td><span class="part">Account-based product</span></td>
+      <td><span class="part">Apple's own</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Works without an account</td>
+      <td class="us"><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="no">Account-based</span></td>
+      <td><span class="yes">Yes</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Notarized by Apple</td>
+      <td class="us"><span class="part">Not yet — beta</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+    </tr>
+    <tr>
+      <td class="rowlbl">Requirements</td>
+      <td class="us">macOS 14+, universal</td>
+      <td>macOS 10.13+, universal</td>
+      <td>macOS 11+</td>
+      <td>Built in</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="verdict">
+  <strong>Honestly: if you want the prettiest map of your disk and you already know what your folders are, buy DaisyDisk — it's $9.99 and it's excellent.</strong> If you want one app that also removes malware, uninstalls apps and finds duplicates, CleanMyMac does more than we do and always will. SpaceWise is for the case in between: you can see something is eating your disk, you don't recognise it, and you're not willing to click Clean on a folder you can't identify.
+</div>
+
+<h2>Where SpaceWise is genuinely worse right now</h2>
+<ul>
+  <li><strong>Not notarized yet.</strong> macOS will warn you, and you'll need System Settings to get past it. The others all open cleanly. <a href="install.html">Here's the install guide.</a></li>
+  <li><strong>No visual sunburst map.</strong> If spatial browsing is how you think, DaisyDisk will suit you better.</li>
+  <li><strong>Narrower scope.</strong> No malware scanning, no uninstaller, no duplicate finder. That's deliberate — but if you want a suite, it's a real gap.</li>
+  <li><strong>Version 1.0.</strong> DaisyDisk has been refined since 2008 and CleanMyMac has a company behind it. We have a rules database, a safety engine and a test suite — but not a decade of edge cases.</li>
+  <li><strong>63 rules is a starting point.</strong> It covers the big modern space-eaters well. It does not know every app on earth, and anything it doesn't recognise is reported as unidentified rather than guessed at.</li>
+</ul>
+
+<h2>Where SpaceWise is genuinely better</h2>
+<ul>
+  <li><strong>It tells you what things are.</strong> Every item gets an explanation of what it is, why it exists and what breaks if it goes. No other tool here does this per item.</li>
+  <li><strong>It refuses to delete things it can't justify.</strong> Unrecognised means "review first," never "safe." Credentials, cloud-synced folders and personal media can't be one-click deleted at all, whatever the rules say.</li>
+  <li><strong>It knows what actually fills a 2026 Mac.</strong> Model weights and build caches are where the tens of gigabytes are now, and generic cleaners haven't caught up.</li>
+  <li><strong>The privacy claim is checkable in a minute.</strong> One network request exists in the entire codebase. Run Little Snitch and confirm it — you don't have to trust a policy page.</li>
+  <li><strong>One-time pricing, and honest about it.</strong> $29 once. Everything works if you never pay; the reminder is dismissible and never blocks anything.</li>
+</ul>
+
+<div style="margin:44px 0 10px;text-align:center">
+  <a class="btn" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">↓&nbsp; Try SpaceWise — free, v1.0 beta</a>
+  <p style="margin-top:14px;font-size:14px;color:rgba(246,241,232,.5)">Universal · macOS 14+ · no account · <a href="install.html">install guide</a></p>
+</div>
+
+<footer>
+  <p><a href="/">Home</a> · <a href="install.html">Install guide</a> · <a href="privacy.html">Privacy</a> · <a href="eula.html">License terms</a> · <a href="mailto:asamy0754@gmail.com">Contact</a></p>
+  <p style="margin-top:10px">© 2026 SpaceWise. Comparison data taken from each vendor's own website on 13 August 2026. All trademarks belong to their respective owners; SpaceWise is not affiliated with, endorsed by, or connected to any of them.</p>
+</footer>
+
+</body>
+</html>
