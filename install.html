@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installing SpaceWise — why macOS shows a warning, and what to do</title>
+<meta name="description" content="Step-by-step instructions for installing the SpaceWise beta on macOS, why Gatekeeper shows an 'unidentified developer' warning, and how to verify the download is authentic.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23232B36%22/><path d=%22M30 62 L50 30 L70 62 Z%22 fill=%22%23E3A23C%22/></svg>">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<header class="nav">
+  <a href="/" class="brand">
+    <span class="brand-mark"><svg viewBox="0 0 100 100"><path d="M30 62 L50 30 L70 62 Z" fill="#E3A23C"/><circle cx="50" cy="70" r="5" fill="#E3A23C"/></svg></span>
+    SpaceWise
+  </a>
+  <a href="/">← Back to home</a>
+</header>
+
+<h1>Installing SpaceWise</h1>
+<p class="updated">For the v1.0 beta · macOS 14 or later · Apple Silicon &amp; Intel</p>
+
+<div class="callout warn">
+  <strong>The short version:</strong> macOS will warn you that SpaceWise is from an "unidentified developer" and refuse to open it. That's expected. It happens because the app isn't yet notarized by Apple — not because anything is wrong with it. You can get past it in about thirty seconds, and this page also shows you how to verify for yourself that the download is genuine before you trust it.
+</div>
+
+<h2>Why the warning appears</h2>
+<p>Apple charges $99/year for a Developer Program membership, which is what lets a developer sign an app with a "Developer ID" and submit it to Apple to be notarized. SpaceWise is a new, independent project and hasn't gone through that yet, so macOS treats it as unidentified.</p>
+<p>This is honest but genuinely annoying, and it's a real trade-off you should know about: the same warning appears for malware. That's why the verification steps further down matter — <strong>you shouldn't take our word for it, and you don't have to.</strong> A notarized build with no warning at all is coming; when it lands, this page will say so.</p>
+
+<h2>Installing it</h2>
+
+<div class="step">
+  <span class="n">1</span>
+  <h3>Download and open the disk image</h3>
+  <p>Open <code>SpaceWise-1.0-beta.dmg</code> from your Downloads, then drag <strong>SpaceWise</strong> onto the <strong>Applications</strong> shortcut in the window that appears.</p>
+</div>
+
+<div class="step">
+  <span class="n">2</span>
+  <h3>Try to open it once — and let it fail</h3>
+  <p>Open Applications and double-click SpaceWise. macOS will refuse and show the "unidentified developer" message. Click <strong>Done</strong>. This step feels pointless but isn't: it's what tells macOS the app exists so it can offer you the override in the next step.</p>
+</div>
+
+<div class="step">
+  <span class="n">3</span>
+  <h3>Allow it in System Settings</h3>
+  <p>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll to the bottom of that page, and you'll see a line saying <em>"SpaceWise was blocked from use because it is not from an identified developer."</em> Click <strong>Open Anyway</strong>, then confirm.</p>
+  <p style="color:rgba(246,241,232,.5);font-size:14px">On macOS 14 Sonoma you can skip this by Control-clicking the app and choosing Open. Apple removed that shortcut in macOS 15 Sequoia, so on 15 and later this is the only route.</p>
+</div>
+
+<div class="step">
+  <span class="n">4</span>
+  <h3>Grant Full Disk Access</h3>
+  <p>SpaceWise asks for Full Disk Access on first run. It needs this because the storage that macOS hides — caches, container data, model files — lives in exactly the folders macOS protects. Without it the scan can only see a fraction of your disk.</p>
+  <p>The app walks you through it, or: <strong>System Settings → Privacy &amp; Security → Full Disk Access</strong>, then switch SpaceWise on.</p>
+</div>
+
+<p style="margin-top:8px">That's it — you only do this once. Afterwards it opens like any other app.</p>
+
+<h2>Verifying the download is genuine</h2>
+<p>Since you're being asked to bypass a security warning and then hand the app Full Disk Access, you're entitled to check that what you downloaded is what we published. Two ways, both about ten seconds in Terminal.</p>
+
+<h3>Check the fingerprint</h3>
+<p>Every release lists a SHA-256 checksum on its <a href="https://github.com/crawler-ebic/spacewise-site/releases/tag/v1.0-beta">GitHub release page</a>. Compare it against the file you downloaded:</p>
+<pre><code>shasum -a 256 ~/Downloads/SpaceWise-1.0-beta.dmg</code></pre>
+<p>If the output matches the checksum on the release page, the file arrived intact and unmodified. If it doesn't match, delete it and tell us.</p>
+
+<h3>Check the signature</h3>
+<p>After installing, confirm the app is signed and that its signature is valid for its actual contents:</p>
+<pre><code>codesign --verify --deep --strict --verbose=2 /Applications/SpaceWise.app</code></pre>
+<p>You should see <code>valid on disk</code> and <code>satisfies its Designated Requirement</code>. It will report an <em>ad-hoc</em> signature — that's expected and is precisely what notarization will replace.</p>
+
+<h3>Watch what it does on the network</h3>
+<p>The strongest check is behavioural, and it costs nothing: run SpaceWise with Little Snitch, LuLu, or Activity Monitor's Network tab open. The app makes <strong>exactly one</strong> network request in its entire codebase — validating a license key, and only if you choose to buy one. Scanning and cleaning make none at all. If you ever see SpaceWise talking to anything else, that's a bug and we want to hear about it immediately.</p>
+
+<div class="callout good">
+  <strong>The app is also built to protect you from itself.</strong> Documents, Desktop, personal media, SSH keys, keychains, iCloud Drive, Messages and Mail data can never be selected for one-click deletion, no matter what any rule claims. Anything SpaceWise doesn't recognise is never marked safe, and unrecognised items go to the Trash rather than being erased.
+</div>
+
+<h2>If something goes wrong</h2>
+<p><strong>"SpaceWise is damaged and can't be opened."</strong> This usually means the download was interrupted. Delete it, empty the Trash, and download again — then check the SHA-256 above before opening.</p>
+<p><strong>Full Disk Access keeps switching itself off.</strong> Known quirk of unsigned development builds: rebuilding changes the signature and macOS drops the permission. Remove SpaceWise from the Full Disk Access list with the <strong>–</strong> button, then add it again with <strong>+</strong>. This stops happening once the app is notarized.</p>
+<p><strong>The scan finds far less than expected.</strong> Almost always Full Disk Access not actually being granted. Settings inside SpaceWise shows its current status.</p>
+<p><strong>Anything else</strong> — <a href="mailto:asamy0754@gmail.com?subject=SpaceWise%20install%20problem">email us</a>. Include your macOS version and what you saw.</p>
+
+<div style="margin:40px 0 10px">
+  <a class="btn" href="https://github.com/crawler-ebic/spacewise-site/releases/download/v1.0-beta/SpaceWise-1.0-beta.dmg">↓&nbsp; Download SpaceWise — v1.0 beta</a>
+</div>
+
+<footer>
+  <p><a href="/">Home</a> · <a href="privacy.html">Privacy</a> · <a href="eula.html">License terms</a> · <a href="mailto:asamy0754@gmail.com">Contact</a></p>
+  <p style="margin-top:10px">© 2026 SpaceWise. Privacy-first storage cleanup for macOS.</p>
+</footer>
+
+</body>
+</html>
